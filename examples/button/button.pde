@@ -7,6 +7,8 @@
 // Connect pin #12 of the expander to Analog 5 (i2c clock)
 // Connect pin #13 of the expander to Analog 4 (i2c data)
 // Connect pins #15, 16 and 17 of the expander to ground (address selection)
+// Connect pin #18 of the expander to 5V THROUGH a 10K resistor (RESET)
+//     if you do not, the expander may fail unexpectedly in several hours or days of use!
 // Connect pin #9 of the expander to 5V (power)
 // Connect pin #10 of the expander to ground (common ground)
 
