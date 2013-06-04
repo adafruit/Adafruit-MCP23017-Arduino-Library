@@ -234,13 +234,28 @@ void Adafruit_MCP23017::setupInterruptPin(uint8_t pin, uint8_t mode) {
 }
 
 uint8_t Adafruit_MCP23017::getLastInterruptPin(){
+	uint8_t intf;
+
 	// try port A
+	intf=readRegister(MCP23017_INTFA);
+	for(int i=0;i<8;i++) if (bitRead(intf,i)) return i;
 
 	// try port B
+	intf=readRegister(MCP23017_INTFB);
+	for(int i=0;i<8;i++) if (bitRead(intf,i)) return i+8;
+
+	return MCP23017_INT_ERR;
 
 }
 uint8_t Adafruit_MCP23017::getLastInterruptPinValue(){
+	uint8_t intPin=getLastInterruptPin();
+	if(intPin!=MCP23017_INT_ERR){
+		uint8_t intcapreg=regForPin(intPin,MCP23017_INTCAPA,MCP23017_INTCAPB);
+		uint8_t bit=bitForPin(intPin);
+		return (readRegister(intcapreg)>>bit) & (0x01);
+	}
 
+	return MCP23017_INT_ERR;
 }
 
 

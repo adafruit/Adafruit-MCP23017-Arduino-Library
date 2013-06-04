@@ -78,4 +78,6 @@ public:
 #define MCP23017_GPIOB 0x13
 #define MCP23017_OLATB 0x15
 
+#define MCP23017_INT_ERR 255
+
 #endif
