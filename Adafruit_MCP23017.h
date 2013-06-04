@@ -28,8 +28,26 @@ public:
   void writeGPIOAB(uint16_t);
   uint16_t readGPIOAB();
 
+  void setupInterrupts(uint8_t mirroring, uint8_t open, uint8_t polarity);
+  void setupInterruptPin(uint8_t p, uint8_t mode);
+  uint8_t getLastInterruptPin();
+  uint8_t getLastInterruptPinValue();
+
  private:
   uint8_t i2caddr;
+
+  uint8_t bitForPin(uint8_t pin);
+  uint8_t regForPin(uint8_t pin, uint8_t portAaddr, uint8_t portBaddr);
+
+  uint8_t readRegister(uint8_t addr);
+  void writeRegister(uint8_t addr, uint8_t value);
+
+  /**
+   * Utility private method to update a register associated with a pin (whether port A/B)
+   * reads its value, updates the particular bit, and writes its value.
+   */
+  void updateRegisterBit(uint8_t p, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr);
+
 };
 
 #define MCP23017_ADDRESS 0x20
