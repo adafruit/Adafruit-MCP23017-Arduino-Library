@@ -6,16 +6,43 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-MCP23017	KEYWORD1
+Adafruit_MCP23017	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-pullUp	KEYWORD2
-writeGPIOAB	KEYWORD2
-readGPIOAB	KEYWORD2
+setPinMode	    KEYWORD2
+setGPIOAMode	KEYWORD2
+setGPIOBMode	KEYWORD2
+setGPIOABMode   KEYWORD2
+setPinPullUp    KEYWORD2
+setGPIOAPullUp  KEYWORD2
+setGPIOBPullUp  KEYWORD2
+setGPIOABPullUp KEYWORD2
+writePin        KEYWORD2
+writeGPIOA      KEYWORD2
+writeGPIOB      KEYWORD2
+writeGPIOAB     KEYWORD2
+readPin         KEYWORD2
+readGPIOA       KEYWORD2
+readGPIOB       KEYWORD2
+readGPIOAB      KEYWORD2
+
+setRegister     KEYWORD2
+set2Registers   KEYWORD2
+getRegister     KEYWORD2
+get2Registers   KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+MCP23017_ADDRESS    LITERAL1
+MCP23017_BIT_BANK   LITERAL1
+MCP23017_BIT_MIRROR LITERAL1
+MCP23017_BIT_SEQOP  LITERAL1
+MCP23017_BIT_DISSLW LITERAL1
+MCP23017_BIT_HAEN   LITERAL1
+MCP23017_BIT_ODR    LITERAL1
+MCP23017_BIT_INTPOL LITERAL1
