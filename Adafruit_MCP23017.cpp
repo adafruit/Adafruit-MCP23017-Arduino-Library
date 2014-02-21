@@ -17,6 +17,33 @@
      https://github.com/mizraith/mizraith-MCP23017.git
    
  ****************************************************/
++/*
+ +    MCP23017 pinouts: 
+ +    Note, real datasheet pins are here:
+ +    http://ww1.microchip.com/downloads/en/devicedoc/21952b.pdf
+ +
+ +    This shows the locations of the 16 pins as they relate to the pin
+ +    number you'd use with mcp.pinMode(n, INPUT).
+ +    These aren't the actual pin numbers given in the data sheet!
+ +    ----u----
+ +    8       7
+ +    9       6
+ +    10      5
+ +    11      4
+ +    12      3
+ +    13      2
+ +    14      1
+ +    15      0
+ +    |       |
+ +    |       |
+ +    |       |
+ +    |       |
+ +    |       |
+ +    |       |
+ +    ---------
+ +*/
+
+
 
 #include <Wire.h>
 #include <avr/pgmspace.h>
