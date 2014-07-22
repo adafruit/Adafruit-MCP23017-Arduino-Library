@@ -9,6 +9,7 @@
 // Connect pins #15, 16 and 17 of the expander to ground (address selection)
 // Connect pin #9 of the expander to 5V (power)
 // Connect pin #10 of the expander to ground (common ground)
+// Connect pin #18 through a ~10kohm resistor to 5V (reset pin, active low)
 
 // Input #0 is on pin 21 so connect a button or switch from there to ground
 
