@@ -12,7 +12,9 @@
  ****************************************************/
 
 #include <Wire.h>
+#ifdef __AVR__
 #include <avr/pgmspace.h>
+#endif
 #include "Adafruit_MCP23017.h"
 
 #if ARDUINO >= 100
