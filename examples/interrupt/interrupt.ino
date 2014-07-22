@@ -1,4 +1,6 @@
-#include <LowPower.h>
+// Install the LowPower library for optional sleeping support.
+// See loop() function comments for details on usage.
+//#include <LowPower.h>
 
 #include <Wire.h>
 #include <Adafruit_MCP23017.h>
@@ -107,9 +109,9 @@ void loop(){
   attachInterrupt(arduinoInterrupt,intCallBack,FALLING);
   
   // Simulate a deep sleep
-  //while(!awakenByInterrupt);
+  while(!awakenByInterrupt);
   // Or sleep the arduino, this lib is great, if you have it.
-  LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  //LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
   
   // disable interrupts while handling them.
   detachInterrupt(arduinoInterrupt);
