@@ -151,6 +151,25 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
 }
 
 /**
+ * Read a single port, A or B, and return its current 8 bit value.
+ * Parameter b should be 0 for GPIOA, and 1 for GPIOB.
+ */
+uint8_t Adafruit_MCP23017::readGPIO(uint8_t b) {
+
+	// read the current GPIO output latches
+	Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
+	if (b == 0)
+		wiresend(MCP23017_GPIOA);
+	else {
+		wiresend(MCP23017_GPIOB);
+	}
+	Wire.endTransmission();
+
+	Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 1);
+	return wirerecv();
+}
+
+/**
  * Writes all the pins in one go. This method is very useful if you are implementing a multiplexed matrix and want to get a decent refresh rate.
  */
 void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
