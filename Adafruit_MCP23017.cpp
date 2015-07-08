@@ -12,8 +12,10 @@
  ****************************************************/
 
 #include <Wire.h>
-#ifdef __AVR__
-#include <avr/pgmspace.h>
+#ifdef __AVR
+  #include <avr/pgmspace.h>
+#elif defined(ESP8266)
+  #include <pgmspace.h>
 #endif
 #include "Adafruit_MCP23017.h"
 
