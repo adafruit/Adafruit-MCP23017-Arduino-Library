@@ -15,6 +15,12 @@
 #define _Adafruit_MCP23017_H_
 
 // Don't forget the Wire library
+#ifdef __AVR_ATtiny85__
+#include <TinyWireM.h>
+#else
+#include <Wire.h>
+#endif
+
 class Adafruit_MCP23017 {
 public:
   void begin(uint8_t addr);
