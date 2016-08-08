@@ -1,4 +1,4 @@
-/*************************************************** 
+/***************************************************
  This is a library for the MCP23017 i2c port expander
 
  These displays use I2C to communicate, 2 pins are required to
@@ -123,6 +123,22 @@ void Adafruit_MCP23017::begin(uint8_t addr) {
 	writeRegister(MCP23017_IODIRA,0xff);
 	writeRegister(MCP23017_IODIRB,0xff);
 }
+
+#ifdef ESP8266
+  void Adafruit_MCP23017::begin(uint8_t addr, uint8_t sda, uint8_t sdc) {
+    if (addr > 7) {
+  		addr = 7;
+  	}
+  	i2caddr = addr;
+
+  	Wire.begin(sda, sdc);
+
+  	// set defaults!
+  	// all inputs on port A and B
+  	writeRegister(MCP23017_IODIRA,0xff);
+  	writeRegister(MCP23017_IODIRB,0xff);
+  }
+#endif
 
 /**
  * Initializes the default MCP23017, with 000 for the configurable part of the address
@@ -287,5 +303,3 @@ uint8_t Adafruit_MCP23017::getLastInterruptPinValue(){
 
 	return MCP23017_INT_ERR;
 }
-
-
