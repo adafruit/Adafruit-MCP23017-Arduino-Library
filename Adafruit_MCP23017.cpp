@@ -204,6 +204,7 @@ void Adafruit_MCP23017::digitalWrite(uint8_t pin, uint8_t d) {
 	// write the new GPIO
 	regAddr=regForPin(pin,MCP23017_GPIOA,MCP23017_GPIOB);
 	writeRegister(regAddr,gpio);
+	Wire.endTransmission();
 }
 
 void Adafruit_MCP23017::pullUp(uint8_t p, uint8_t d) {
