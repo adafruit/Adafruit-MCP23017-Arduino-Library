@@ -15,11 +15,11 @@
 #define _Adafruit_MCP23017_H_
 
 // Don't forget the Wire library
-#ifdef __AVR_ATtiny85__
-#include <TinyWireM.h>
-#else
+//#ifdef __AVR_ATtiny85__           //TinyWireM is now part of
+//#include <TinyWireM.h>            //   Adafruit version of Wire Library
+//#else
 #include <Wire.h>
-#endif
+//#endif
 
 class Adafruit_MCP23017 {
 public:

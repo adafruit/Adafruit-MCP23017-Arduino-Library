@@ -12,8 +12,7 @@
  ****************************************************/
 
 #ifdef __AVR_ATtiny85__
-  #include <TinyWireM.h>
-  #define Wire TinyWireM
+  #define Wire TinyWireM      //TinyWireM is now part of Adafruit Wire library
 #else
   #include <Wire.h>
 #endif
