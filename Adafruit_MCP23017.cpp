@@ -11,13 +11,6 @@
  BSD license, all text above must be included in any redistribution
  ****************************************************/
 
-#ifdef __AVR_ATtiny85__
-  #define Wire TinyWireM      //TinyWireM is now part of Adafruit Wire library
-#else
-  #include <Wire.h>
-#endif
-
-
 #ifdef __AVR
   #include <avr/pgmspace.h>
 #elif defined(ESP8266)
