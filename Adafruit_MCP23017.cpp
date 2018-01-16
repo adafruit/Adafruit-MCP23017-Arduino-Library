@@ -702,6 +702,8 @@ void Adafruit_MCP23017::setBit(uint8_t reg, uint8_t bitpos, uint8_t bitval) {
 	} else {
 	    current = current | (1 << bitpos);
 	}
+	
+	setRegister(reg, current);
 }
 
 /**
