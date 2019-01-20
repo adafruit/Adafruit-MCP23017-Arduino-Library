@@ -127,7 +127,8 @@ void Adafruit_MCP23017::begin(void) {
  * Sets the pin mode to either INPUT or OUTPUT
  */
 void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
-	updateRegisterBit(p,(d==INPUT),MCP23017_IODIRA,MCP23017_IODIRB);
+	updateRegisterBit(p,(d==INPUT || d==INPUT_PULLUP),MCP23017_IODIRA,MCP23017_IODIRB);
+	if (d == INPUT_PULLUP) pullUp(p, 0xFF);
 }
 
 /**
@@ -140,14 +141,19 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
 	// read the current GPIO output latches
 	Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
 	wiresend(MCP23017_GPIOA);
+#ifdef MCP23017_Serial_Debug
+	uint8_t rc_s = Wire.endTransmission();
+#else
 	Wire.endTransmission();
-
+#endif
 	Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 2);
 	a = wirerecv();
 	ba = wirerecv();
 	ba <<= 8;
 	ba |= a;
-
+#ifdef MCP23017_Serial_Debug
+	if (rc_s) Serial.printf("Error %x on reading GPIO (Send to slave)", rc_s);
+#endif
 	return ba;
 }
 
