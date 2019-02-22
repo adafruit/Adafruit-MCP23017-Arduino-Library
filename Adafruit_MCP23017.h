@@ -30,6 +30,7 @@
 
 class Adafruit_MCP23017 {
 public:
+  Adafruit_MCP23017(TwoWire &wire = Wire);
   void begin(uint8_t addr);
   void begin(void);
 
@@ -62,6 +63,7 @@ public:
    */
   void updateRegisterBit(uint8_t p, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr);
 
+  TwoWire *wire;
 };
 
 #define MCP23017_ADDRESS 0x20
