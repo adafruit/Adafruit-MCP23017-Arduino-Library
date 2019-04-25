@@ -255,6 +255,10 @@ void Adafruit_MCP23017::setupInterruptPin(uint8_t pin, uint8_t mode) {
 
 }
 
+void Adafruit_MCP23017::disableInterruptPin(uint8_t pin) {
+	updateRegisterBit(pin,LOW,MCP23017_GPINTENA,MCP23017_GPINTENB);
+}
+
 uint8_t Adafruit_MCP23017::getLastInterruptPin(){
 	uint8_t intf;
 
