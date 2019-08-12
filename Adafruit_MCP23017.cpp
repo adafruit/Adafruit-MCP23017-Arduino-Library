@@ -209,7 +209,7 @@ uint8_t Adafruit_MCP23017::digitalRead(uint8_t pin) {
 }
 
 /**
- * Configures the interrupt system. both port A and B are assigned the same configuration.
+ * Configures the interrupt system.
  * Mirroring will OR both INTA and INTB pins.
  * Opendrain will set the INT pin to value or open drain.
  * polarity will set LOW or HIGH on interrupt.
@@ -218,19 +218,12 @@ uint8_t Adafruit_MCP23017::digitalRead(uint8_t pin) {
  * the default configuration.
  */
 void Adafruit_MCP23017::setupInterrupts(uint8_t mirroring, uint8_t openDrain, uint8_t polarity){
-	// configure the port A
+	// configure the interrupt pins (affects both ports, MCP23017_IOCONA & MCP23017_IOCONB point to the same register)
 	uint8_t ioconfValue=readRegister(MCP23017_IOCONA);
 	bitWrite(ioconfValue,6,mirroring);
 	bitWrite(ioconfValue,2,openDrain);
 	bitWrite(ioconfValue,1,polarity);
 	writeRegister(MCP23017_IOCONA,ioconfValue);
-
-	// Configure the port B
-	ioconfValue=readRegister(MCP23017_IOCONB);
-	bitWrite(ioconfValue,6,mirroring);
-	bitWrite(ioconfValue,2,openDrain);
-	bitWrite(ioconfValue,1,polarity);
-	writeRegister(MCP23017_IOCONB,ioconfValue);
 }
 
 /**
