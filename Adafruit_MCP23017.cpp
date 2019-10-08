@@ -124,10 +124,12 @@ void Adafruit_MCP23017::begin(void) {
 }
 
 /**
- * Sets the pin mode to either INPUT or OUTPUT
+ * Sets the pin mode to either INPUT, INPUT_PULLUP or OUTPUT
  */
 void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
-	updateRegisterBit(p,(d==INPUT),MCP23017_IODIRA,MCP23017_IODIRB);
+	updateRegisterBit(p,(d!=OUTPUT),MCP23017_IODIRA,MCP23017_IODIRB);
+	if(d!=OUTPUT)
+		updateRegisterBit(p,(d==INPUT_PULLUP),MCP23017_GPPUA,MCP23017_GPPUB);
 }
 
 /**
