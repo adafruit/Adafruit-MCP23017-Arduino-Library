@@ -103,12 +103,8 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t p
  * Initializes the MCP23017 given its HW selected address, see datasheet for Address selection.
  */
 void Adafruit_MCP23017::begin(uint8_t addr) {
-	if (addr > 7) {
-		addr = 7;
-	}
 	i2caddr = addr;
 
-	Wire.begin();
 
 	// set defaults!
 	// all inputs on port A and B
@@ -219,7 +215,7 @@ uint8_t Adafruit_MCP23017::digitalRead(uint8_t pin) {
  */
 void Adafruit_MCP23017::setupInterrupts(uint8_t mirroring, uint8_t openDrain, uint8_t polarity){
 	// configure the port A
-	uint8_t ioconfValue=readRegister(MCP23017_IOCONA);
+  uint8_t ioconfValue=0x0;
 	bitWrite(ioconfValue,6,mirroring);
 	bitWrite(ioconfValue,2,openDrain);
 	bitWrite(ioconfValue,1,polarity);
