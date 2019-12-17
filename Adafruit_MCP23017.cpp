@@ -117,6 +117,23 @@ void Adafruit_MCP23017::begin(uint8_t addr) {
 }
 
 /**
+ * Initializes the MCP23017 given its HW selected address, see datasheet for Address selection.
+ */
+void Adafruit_MCP23017::begin(uint8_t addr, uint8_t sda_pin, uint8_t scl_pin) {
+	if (addr > 7) {
+		addr = 7;
+	}
+	i2caddr = addr;
+
+	Wire.begin(sda_pin, scl_pin);
+
+	// set defaults!
+	// all inputs on port A and B
+	writeRegister(MCP23017_IODIRA,0xff);
+	writeRegister(MCP23017_IODIRB,0xff);
+}
+
+/**
  * Initializes the default MCP23017, with 000 for the configurable part of the address
  */
 void Adafruit_MCP23017::begin(void) {
