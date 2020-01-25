@@ -2,6 +2,8 @@ This is a library for the MCP23017 I2c Port Expander
  
 These chips use I2C to communicate, 2 pins required to interface
 
+Reset pin should always be kept high, pulling it low would require a new initialization afterwards
+
 Adafruit invests time and resources providing this open source code, 
 please support Adafruit and open-source hardware by purchasing 
 products from Adafruit!
