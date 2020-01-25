@@ -103,6 +103,10 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t p
  * Initializes the MCP23017 given its HW selected address, see datasheet for Address selection.
  */
 void Adafruit_MCP23017::begin(uint8_t addr) {
+        // allow using both syntaxes, complete i2x address or address pin setting
+	if ((addr >= MCP23017_ADDRESS) && (addr < (MCP23017_ADDRESS+8))) {
+		addr -= MCP23017_ADDRESS;
+	}	
 	if (addr > 7) {
 		addr = 7;
 	}
