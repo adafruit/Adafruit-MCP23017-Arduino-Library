@@ -124,6 +124,43 @@ void Adafruit_MCP23017::begin(void) {
 }
 
 /**
+ * Changes the adress to which MCP23017 is talked to.
+ * Initializing all ports as input is optional.
+ * This enables the option to control multiple MCP23017 with one instance.
+ * Both adress syntax (i2x) = 0x20 or only the configurable part is supported.
+ */
+void Adafruit_MCP23017::changeAddress(uint8_t addr, bool initAsInput) {
+
+	// allow using both syntaxes, complete i2x address or address pin setting
+	if ((addr >= MCP23017_ADDRESS) && (addr < (MCP23017_ADDRESS+8))) {
+		addr -= MCP23017_ADDRESS;
+	}
+
+	if (addr > 7) {
+		addr = 7;
+	}
+
+	i2caddr = addr;
+
+	if (initAsInput){
+		// set defaults only if wanted.
+		// all inputs on port A and B
+		writeRegister(MCP23017_IODIRA,0xff);
+		writeRegister(MCP23017_IODIRB,0xff);
+	}
+}
+
+/**
+ * Changes the adress to which MCP23017 is talked to.
+ * This enables the option to control multiple MCP23017 with one instance.
+ * Both adress syntax (i2x) = 0x20 or only the configurable part is supported.
+ */
+void Adafruit_MCP23017::changeAddress(uint8_t addr) {
+	changeAddress(addr,false);
+}
+
+
+/**
  * Sets the pin mode to either INPUT or OUTPUT
  */
 void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
