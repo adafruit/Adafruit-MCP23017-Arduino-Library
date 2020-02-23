@@ -130,7 +130,6 @@ void Adafruit_MCP23017::begin(void) {
  * Both adress syntax (i2x) = 0x20 or only the configurable part is supported.
  */
 void Adafruit_MCP23017::changeAddress(uint8_t addr, bool initAsInput) {
-
 	// allow using both syntaxes, complete i2x address or address pin setting
 	if ((addr >= MCP23017_ADDRESS) && (addr < (MCP23017_ADDRESS+8))) {
 		addr -= MCP23017_ADDRESS;
