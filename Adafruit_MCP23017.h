@@ -32,6 +32,8 @@ class Adafruit_MCP23017 {
 public:
   void begin(uint8_t addr);
   void begin(void);
+  void changeAddress(uint8_t addr, bool initAsInput);
+  void changeAddress(uint8_t addr);
 
   void pinMode(uint8_t p, uint8_t d);
   void digitalWrite(uint8_t p, uint8_t d);
