@@ -30,8 +30,8 @@
 
 class Adafruit_MCP23017 {
 public:
-  void begin(uint8_t addr);
-  void begin(void);
+  bool begin(uint8_t addr);
+  bool begin(void);
 
   void pinMode(uint8_t p, uint8_t d);
   void digitalWrite(uint8_t p, uint8_t d);
@@ -54,7 +54,7 @@ public:
   uint8_t regForPin(uint8_t pin, uint8_t portAaddr, uint8_t portBaddr);
 
   uint8_t readRegister(uint8_t addr);
-  void writeRegister(uint8_t addr, uint8_t value);
+  bool writeRegister(uint8_t addr, uint8_t value);
 
   /**
    * Utility private method to update a register associated with a pin (whether port A/B)

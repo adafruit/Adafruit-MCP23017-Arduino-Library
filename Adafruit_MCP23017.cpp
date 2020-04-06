@@ -71,12 +71,12 @@ uint8_t Adafruit_MCP23017::readRegister(uint8_t addr){
 /**
  * Writes a given register
  */
-void Adafruit_MCP23017::writeRegister(uint8_t regAddr, uint8_t regValue){
+bool Adafruit_MCP23017::writeRegister(uint8_t regAddr, uint8_t regValue){
 	// Write the register
 	Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
 	wiresend(regAddr);
 	wiresend(regValue);
-	Wire.endTransmission();
+	return Wire.endTransmission() == 0;
 }
 
 
@@ -102,7 +102,7 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t p
 /**
  * Initializes the MCP23017 given its HW selected address, see datasheet for Address selection.
  */
-void Adafruit_MCP23017::begin(uint8_t addr) {
+bool Adafruit_MCP23017::begin(uint8_t addr) {
 	if (addr > 7) {
 		addr = 7;
 	}
@@ -112,15 +112,18 @@ void Adafruit_MCP23017::begin(uint8_t addr) {
 
 	// set defaults!
 	// all inputs on port A and B
-	writeRegister(MCP23017_IODIRA,0xff);
-	writeRegister(MCP23017_IODIRB,0xff);
+	bool dirA = writeRegister(MCP23017_IODIRA,0xff);
+	bool dirB = writeRegister(MCP23017_IODIRB,0xff);
+	bool polA = writeRegister(MCP23017_IPOLA, 0x00);
+	bool polB = writeRegister(MCP23017_IPOLB, 0x00);
+	return dirA && dirB && polA && polB;
 }
 
 /**
  * Initializes the default MCP23017, with 000 for the configurable part of the address
  */
-void Adafruit_MCP23017::begin(void) {
-	begin(0);
+bool Adafruit_MCP23017::begin(void) {
+	return begin(0);
 }
 
 /**
