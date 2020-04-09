@@ -33,7 +33,7 @@ public:
   bool begin(uint8_t addr);
   bool begin(void);
 
-  void pinMode(uint8_t p, uint8_t d);
+  bool pinMode(uint8_t p, uint8_t d);
   void digitalWrite(uint8_t p, uint8_t d);
   void pullUp(uint8_t p, uint8_t d);
   uint8_t digitalRead(uint8_t p);
@@ -60,7 +60,7 @@ public:
    * Utility private method to update a register associated with a pin (whether port A/B)
    * reads its value, updates the particular bit, and writes its value.
    */
-  void updateRegisterBit(uint8_t p, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr);
+  bool updateRegisterBit(uint8_t p, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr);
 
 };
 

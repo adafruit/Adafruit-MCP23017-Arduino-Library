@@ -85,7 +85,7 @@ bool Adafruit_MCP23017::writeRegister(uint8_t regAddr, uint8_t regValue){
  * - Reads the current register value
  * - Writes the new register value
  */
-void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr) {
+bool Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t portAaddr, uint8_t portBaddr) {
 	uint8_t regValue;
 	uint8_t regAddr=regForPin(pin,portAaddr,portBaddr);
 	uint8_t bit=bitForPin(pin);
@@ -94,7 +94,7 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue, uint8_t p
 	// set the value for the particular bit
 	bitWrite(regValue,bit,pValue);
 
-	writeRegister(regAddr,regValue);
+	return writeRegister(regAddr,regValue);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,8 +129,8 @@ bool Adafruit_MCP23017::begin(void) {
 /**
  * Sets the pin mode to either INPUT or OUTPUT
  */
-void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
-	updateRegisterBit(p,(d==INPUT),MCP23017_IODIRA,MCP23017_IODIRB);
+bool Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
+	return updateRegisterBit(p,(d==INPUT),MCP23017_IODIRA,MCP23017_IODIRB);
 }
 
 /**
