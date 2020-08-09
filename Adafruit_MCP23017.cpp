@@ -36,19 +36,19 @@
 #endif
 
 // minihelper to keep Arduino backward compatibility
-static inline void wiresend(uint8_t x) {
+static inline void wiresend(uint8_t x, TwoWire *theWire) {
 #if ARDUINO >= 100
-  Wire.write((uint8_t)x);
+  theWire->write((uint8_t)x);
 #else
-  Wire.send(x);
+  theWire->send(x);
 #endif
 }
 
-static inline uint8_t wirerecv(void) {
+static inline uint8_t wirerecv(TwoWire *theWire) {
 #if ARDUINO >= 100
-  return Wire.read();
+  return theWire->read();
 #else
-  return Wire.receive();
+  return theWire->receive();
 #endif
 }
 
@@ -70,11 +70,11 @@ uint8_t Adafruit_MCP23017::regForPin(uint8_t pin, uint8_t portAaddr,
  */
 uint8_t Adafruit_MCP23017::readRegister(uint8_t addr) {
   // read the current GPINTEN
-  Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
-  wiresend(addr);
-  Wire.endTransmission();
-  Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 1);
-  return wirerecv();
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(addr, _wire);
+  _wire->endTransmission();
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 1);
+  return wirerecv(_wire);
 }
 
 /**
@@ -82,10 +82,10 @@ uint8_t Adafruit_MCP23017::readRegister(uint8_t addr) {
  */
 void Adafruit_MCP23017::writeRegister(uint8_t regAddr, uint8_t regValue) {
   // Write the register
-  Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
-  wiresend(regAddr);
-  wiresend(regValue);
-  Wire.endTransmission();
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(regAddr, _wire);
+  wiresend(regValue, _wire);
+  _wire->endTransmission();
 }
 
 /**
@@ -114,13 +114,14 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue,
  * Address selection.
  * @param addr Selected address
  */
-void Adafruit_MCP23017::begin(uint8_t addr) {
+void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
   if (addr > 7) {
     addr = 7;
   }
   i2caddr = addr;
+  _wire = theWire;
 
-  Wire.begin();
+  _wire->begin();
 
   // set defaults!
   // all inputs on port A and B
@@ -132,7 +133,7 @@ void Adafruit_MCP23017::begin(uint8_t addr) {
  * Initializes the default MCP23017, with 000 for the configurable part of the
  * address
  */
-void Adafruit_MCP23017::begin(void) { begin(0); }
+void Adafruit_MCP23017::begin(TwoWire *theWire) { begin(0, theWire); }
 
 /**
  * Sets the pin mode to either INPUT or OUTPUT
@@ -152,13 +153,13 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
   uint8_t a;
 
   // read the current GPIO output latches
-  Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
-  wiresend(MCP23017_GPIOA);
-  Wire.endTransmission();
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(MCP23017_GPIOA, _wire);
+  _wire->endTransmission();
 
-  Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 2);
-  a = wirerecv();
-  ba = wirerecv();
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 2);
+  a = wirerecv(_wire);
+  ba = wirerecv(_wire);
   ba <<= 8;
   ba |= a;
 
@@ -173,16 +174,16 @@ uint16_t Adafruit_MCP23017::readGPIOAB() {
 uint8_t Adafruit_MCP23017::readGPIO(uint8_t b) {
 
   // read the current GPIO output latches
-  Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
   if (b == 0)
-    wiresend(MCP23017_GPIOA);
+    wiresend(MCP23017_GPIOA, _wire);
   else {
-    wiresend(MCP23017_GPIOB);
+    wiresend(MCP23017_GPIOB, _wire);
   }
-  Wire.endTransmission();
+  _wire->endTransmission();
 
-  Wire.requestFrom(MCP23017_ADDRESS | i2caddr, 1);
-  return wirerecv();
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 1);
+  return wirerecv(_wire);
 }
 
 /**
@@ -190,11 +191,11 @@ uint8_t Adafruit_MCP23017::readGPIO(uint8_t b) {
  * implementing a multiplexed matrix and want to get a decent refresh rate.
  */
 void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
-  Wire.beginTransmission(MCP23017_ADDRESS | i2caddr);
-  wiresend(MCP23017_GPIOA);
-  wiresend(ba & 0xFF);
-  wiresend(ba >> 8);
-  Wire.endTransmission();
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(MCP23017_GPIOA, _wire);
+  wiresend(ba & 0xFF, _wire);
+  wiresend(ba >> 8, _wire);
+  _wire->endTransmission();
 }
 
 /*!
