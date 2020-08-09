@@ -113,6 +113,7 @@ void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue,
  * Initializes the MCP23017 given its HW selected address, see datasheet for
  * Address selection.
  * @param addr Selected address
+ * @param theWire the I2C object to use, defaults to &Wire
  */
 void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
   if (addr > 7) {
@@ -132,6 +133,7 @@ void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
 /**
  * Initializes the default MCP23017, with 000 for the configurable part of the
  * address
+ * @param theWire the I2C object to use, defaults to &Wire
  */
 void Adafruit_MCP23017::begin(TwoWire *theWire) { begin(0, theWire); }
 
