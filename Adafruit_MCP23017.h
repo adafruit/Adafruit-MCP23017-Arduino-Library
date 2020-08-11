@@ -23,8 +23,8 @@
  */
 class Adafruit_MCP23017 {
 public:
-  void begin(uint8_t addr);
-  void begin(void);
+  void begin(uint8_t addr, TwoWire *theWire = &Wire);
+  void begin(TwoWire *theWire = &Wire);
 
   void pinMode(uint8_t p, uint8_t d);
   void digitalWrite(uint8_t p, uint8_t d);
@@ -42,6 +42,7 @@ public:
 
 private:
   uint8_t i2caddr;
+  TwoWire *_wire; //!< pointer to a TwoWire object
 
   uint8_t bitForPin(uint8_t pin);
   uint8_t regForPin(uint8_t pin, uint8_t portAaddr, uint8_t portBaddr);
