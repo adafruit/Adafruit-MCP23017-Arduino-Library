@@ -21,7 +21,7 @@ Pin Addressing
 
 When using single pin operations such as _pinMode(pinId, dir)_ or _digitalRead(pinId)_  or _digitalWrite(pinId, val)_ then the pins are addressed using the ID's below. For example, for set the mode of _GPB0_ then use _pinMode(8, ...)_.
 
-Physial Pin #| Pin Name | Pin ID
+Physical Pin #| Pin Name | Pin ID
 ----|------|------------------------------
 21 | GPA0 | 0
 22 | GPA1 | 1
