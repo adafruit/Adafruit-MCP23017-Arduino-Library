@@ -1,3 +1,5 @@
+# Adafruit MCP23017 Arduino Library [![Build Status](https://github.com/adafruit/Adafruit-MCP23017-Arduino-Library/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit-MCP23017-Arduino-Library/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit-MCP23017-Arduino-Library/html/index.html)
+
 This is a library for the MCP23017 I2c Port Expander
  
 These chips use I2C to communicate, 2 pins required to interface
@@ -19,7 +21,7 @@ Pin Addressing
 
 When using single pin operations such as _pinMode(pinId, dir)_ or _digitalRead(pinId)_  or _digitalWrite(pinId, val)_ then the pins are addressed using the ID's below. For example, for set the mode of _GPB0_ then use _pinMode(8, ...)_.
 
-Physial Pin #| Pin Name | Pin ID
+Physical Pin #| Pin Name | Pin ID
 ----|------|------------------------------
 21 | GPA0 | 0
 22 | GPA1 | 1
