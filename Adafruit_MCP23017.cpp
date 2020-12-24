@@ -142,6 +142,9 @@ void Adafruit_MCP23017::begin(TwoWire *theWire) { begin(0, theWire); }
  * Initializing all ports as input is optional.
  * This enables the option to control multiple MCP23017 with one instance.
  * Both adress syntax (i2x) = 0x20 or only the configurable part is supported.
+ * @param addr Selected address
+ * @param initAsInput If true initializing all ports as input, otherwise they
+ * stay as they are
  */
 void Adafruit_MCP23017::changeAddress(uint8_t addr, bool initAsInput) {
   // allow using both syntaxes, complete i2x address or address pin setting
@@ -167,6 +170,7 @@ void Adafruit_MCP23017::changeAddress(uint8_t addr, bool initAsInput) {
  * Changes the adress to which MCP23017 is talked to.
  * This enables the option to control multiple MCP23017 with one instance.
  * Both adress syntax (i2x) = 0x20 or only the configurable part is supported.
+ * @param addr Selected address
  */
 void Adafruit_MCP23017::changeAddress(uint8_t addr) {
   changeAddress(addr, false);
