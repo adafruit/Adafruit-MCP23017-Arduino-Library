@@ -200,6 +200,28 @@ void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
   _wire->endTransmission();
 }
 
+/**
+ * Reads all 16 pins (port A and B) GPIO output latches into a single 16 bits variable.
+ * @return Returns the 16 bit variable representing all 16 pins
+ */
+uint16_t Adafruit_MCP23017::readOLATAB() {
+  uint16_t ba = 0;
+  uint8_t a;
+
+  // read the current GPIO output latches
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(MCP23017_OLATA, _wire);
+  _wire->endTransmission();
+
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 2);
+  a = wirerecv(_wire);
+  ba = wirerecv(_wire);
+  ba <<= 8;
+  ba |= a;
+
+  return ba;
+}
+
 /*!
  * @brief Writes to a pin on the MCP23017
  * @param pin Pin to write to

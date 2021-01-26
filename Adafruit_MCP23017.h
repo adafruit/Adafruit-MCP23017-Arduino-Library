@@ -35,6 +35,8 @@ public:
   uint16_t readGPIOAB();
   uint8_t readGPIO(uint8_t b);
 
+  uint16_t readOLATAB();
+
   void setupInterrupts(uint8_t mirroring, uint8_t open, uint8_t polarity);
   void setupInterruptPin(uint8_t p, uint8_t mode);
   uint8_t getLastInterruptPin();
