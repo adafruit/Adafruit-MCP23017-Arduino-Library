@@ -201,7 +201,8 @@ void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
 }
 
 /**
- * Reads all 16 pins (port A and B) GPIO output latches into a single 16 bits variable.
+ * Reads all 16 pins (port A and B) GPIO output latches into a single 16 bits
+ * variable.
  * @return Returns the 16 bit variable representing all 16 pins
  */
 uint16_t Adafruit_MCP23017::readOLATAB() {
