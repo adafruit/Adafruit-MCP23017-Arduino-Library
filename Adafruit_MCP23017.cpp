@@ -295,6 +295,17 @@ void Adafruit_MCP23017::setupInterruptPin(uint8_t pin, uint8_t mode) {
   updateRegisterBit(pin, HIGH, MCP23017_GPINTENA, MCP23017_GPINTENB);
 }
 
+/**
+ * Disable a pin for interrupt.
+ *
+ * @param pin Pin to set
+ *
+ */
+void Adafruit_MCP23017::disableInterruptPin(uint8_t pin) {
+  // disable the pin for interrupt
+  updateRegisterBit(pin, LOW, MCP23017_GPINTENA, MCP23017_GPINTENB);
+}
+
 /*!
  * @brief Gets the last interrupt pin
  * @return Returns the last interrupt pin
