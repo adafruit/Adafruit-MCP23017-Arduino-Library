@@ -96,8 +96,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a33cb53035caae7490ad46437933fdfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa02394c95c129d3b164c53d38a49d07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23017.html#afa02394c95c129d3b164c53d38a49d07">setupInterrupts</a> (uint8_t mirroring, uint8_t open, uint8_t polarity)</td></tr>
 <tr class="separator:afa02394c95c129d3b164c53d38a49d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c9e3dcdac1ad0c34e543e87470b30b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23017.html#a2c9e3dcdac1ad0c34e543e87470b30b7">setupInterruptPin</a> (uint8_t p, uint8_t mode)</td></tr>
-<tr class="separator:a2c9e3dcdac1ad0c34e543e87470b30b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c622d20e38977495bf28b180ddde4c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23017.html#a9c622d20e38977495bf28b180ddde4c3">setupInterruptPin</a> (uint8_t pin, uint8_t mode)</td></tr>
+<tr class="separator:a9c622d20e38977495bf28b180ddde4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a572713c056f181ee07ddc7f06d1f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23017.html#af2a572713c056f181ee07ddc7f06d1f1">disableInterruptPin</a> (uint8_t pin)</td></tr>
+<tr class="separator:af2a572713c056f181ee07ddc7f06d1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a003aa82d178e6460e2dde8d3d7f135ab"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23017.html#a003aa82d178e6460e2dde8d3d7f135ab">getLastInterruptPin</a> ()</td></tr>
 <tr class="memdesc:a003aa82d178e6460e2dde8d3d7f135ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the last interrupt pin.  <a href="#a003aa82d178e6460e2dde8d3d7f135ab">More...</a><br /></td></tr>
 <tr class="separator:a003aa82d178e6460e2dde8d3d7f135ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -407,8 +409,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2c9e3dcdac1ad0c34e543e87470b30b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c9e3dcdac1ad0c34e543e87470b30b7">&#9670;&nbsp;</a></span>setupInterruptPin()</h2>
+<a id="a9c622d20e38977495bf28b180ddde4c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c622d20e38977495bf28b180ddde4c3">&#9670;&nbsp;</a></span>setupInterruptPin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,6 +439,31 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">pin</td><td>Pin to set </td></tr>
     <tr><td class="paramname">mode</td><td>Mode to set the pin </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af2a572713c056f181ee07ddc7f06d1f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a572713c056f181ee07ddc7f06d1f1">&#9670;&nbsp;</a></span>disableInterruptPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_MCP23017::disableInterruptPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Disable a pin for interrupt.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Pin to set </td></tr>
   </table>
   </dd>
 </dl>
