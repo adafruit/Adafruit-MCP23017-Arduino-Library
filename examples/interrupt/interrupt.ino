@@ -105,8 +105,8 @@ void cleanInterrupts(){
 void loop(){
   // Clear Previous Interrupts
   if (digitalRead(arduinoIntPin) == LOW) {
-    MCP.digitalRead(0);
-    MCP.digitalRead(7);
+    mcp.digitalRead(0);
+    mcp.digitalRead(7);
   }
   
   // enable interrupts before going to sleep/wait
