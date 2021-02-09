@@ -135,7 +135,7 @@ void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
   
   // Turn off pull up resistors
   writeRegister(MCP23017_GPPUA, 0x00);
-  writeRegister(MCP23017_GPPUB, 0x00);
+  writeRegister(MCP23017_GPPUB, 0x00); 
 }
 
 /**
