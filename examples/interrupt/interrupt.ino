@@ -103,6 +103,11 @@ void cleanInterrupts(){
  * and you can wait for interrupts while waiting.
  */
 void loop(){
+  // Clear Previous Interrupts
+  if (digitalRead(arduinoIntPin) == LOW) {
+    mcp.digitalRead(0);
+    mcp.digitalRead(7);
+  }
   
   // enable interrupts before going to sleep/wait
   // And we setup a callback for the arduino INT handler.
