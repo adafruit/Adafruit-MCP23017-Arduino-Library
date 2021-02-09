@@ -124,8 +124,6 @@ void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
 
   _wire->begin();
 
-  _wire->setClock(400000);
-
   // set defaults!
   // all inputs on port A and B
   writeRegister(MCP23017_IODIRA, 0xff);
