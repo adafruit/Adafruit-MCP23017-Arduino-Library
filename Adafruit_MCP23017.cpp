@@ -161,26 +161,26 @@ void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
  */
 void Adafruit_MCP23017::portMode(uint8_t b, uint8_t d) {
 	uint8_t addrIODIR = MCP23017_IODIRA;
-	uint8_t addrGPPU = MCP23017_GPPUA;
-	
-	if(b == MCP23017_PORT_B) {
-		addrIODIR = MCP23017_IODIRB;
-		addrGPPU = MCP23017_GPPUB;
-	}
-	
-	switch(d) {
-		case INPUT:
-			writeRegister(addrIODIR, 0xff);
-			writeRegister(addrGPPU, 0x00);
-			break;
-		case INPUT_PULLUP:
-			writeRegister(addrIODIR, 0xff);
-			writeRegister(addrGPPU, 0xff);
-			break;
-		case OUTPUT:
-			writeRegister(addrIODIR, 0x00);
-			break;
-	}
+  uint8_t addrGPPU = MCP23017_GPPUA;
+
+  if (b == MCP23017_PORT_B) {
+    addrIODIR = MCP23017_IODIRB;
+    addrGPPU = MCP23017_GPPUB;
+  }
+
+  switch (d) {
+  case INPUT:
+    writeRegister(addrIODIR, 0xff);
+    writeRegister(addrGPPU, 0x00);
+    break;
+  case INPUT_PULLUP:
+    writeRegister(addrIODIR, 0xff);
+    writeRegister(addrGPPU, 0xff);
+    break;
+  case OUTPUT:
+    writeRegister(addrIODIR, 0x00);
+    break;
+  }
 }
 
 /**
@@ -189,18 +189,17 @@ void Adafruit_MCP23017::portMode(uint8_t b, uint8_t d) {
  * @param d Polarity 0 = non-inverted, 1 = inverted
  */
 void Adafruit_MCP23017::portPolarity(uint8_t b, uint8_t d) {
-	uint8_t addrIPOL = MCP23017_IPOLA;
-	
-	if(b == MCP23017_PORT_B) {
-		addrIPOL = MCP23017_IPOLB;
-	}
-	
-	if(d == 0) {	// non-inverted
-		writeRegister(addrIPOL, 0x00);
-	}
-	else {				// inverted
-		writeRegister(addrIPOL, 0xff);
-	}
+  uint8_t addrIPOL = MCP23017_IPOLA;
+
+  if (b == MCP23017_PORT_B) {
+    addrIPOL = MCP23017_IPOLB;
+  }
+
+  if (d == 0) { // non-inverted
+    writeRegister(addrIPOL, 0x00);
+  } else { // inverted
+    writeRegister(addrIPOL, 0xff);
+  }
 }
 
 /**
@@ -258,7 +257,7 @@ void Adafruit_MCP23017::writeGPIOAB(uint16_t ba) {
 }
 
 /**
- * Write a single port, A or B. 
+ * Write a single port, A or B.
  * @param b Decide which gpio to use. Should be 0 for GPIOA, and 1 for GPIOB.
  * @param d byte of data to send
  */
