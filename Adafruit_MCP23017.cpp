@@ -160,7 +160,7 @@ void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
  * @param d Mode to set the port
  */
 void Adafruit_MCP23017::portMode(uint8_t b, uint8_t d) {
-	uint8_t addrIODIR = MCP23017_IODIRA;
+  uint8_t addrIODIR = MCP23017_IODIRA;
   uint8_t addrGPPU = MCP23017_GPPUA;
 
   if (b == MCP23017_PORT_B) {
