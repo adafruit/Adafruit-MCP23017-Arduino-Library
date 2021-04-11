@@ -68,7 +68,7 @@ private:
 // ports
 #define MCP23017_PORT_A 0x00
 #define MCP23017_PORT_B 0x01
-
+ 
 // registers
 #define MCP23017_IODIRA 0x00   //!< I/O direction register A
 #define MCP23017_IPOLA 0x02    //!< Input polarity port register A
