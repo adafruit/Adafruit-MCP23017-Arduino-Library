@@ -13,7 +13,11 @@ MCP23017	KEYWORD1
 #######################################
 
 pullUp	KEYWORD2
+portMode	KEYWORD2
+portPolarity	KEYWORD2
+writeGPIO	KEYWORD2
 writeGPIOAB	KEYWORD2
+readGPIO	KEYWORD2
 readGPIOAB	KEYWORD2
 
 #######################################

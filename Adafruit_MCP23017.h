@@ -27,11 +27,14 @@ public:
   void begin(TwoWire *theWire = &Wire);
 
   void pinMode(uint8_t p, uint8_t d);
+  void portMode(uint8_t b, uint8_t d);
+  void portPolarity(uint8_t b, uint8_t d);
   void digitalWrite(uint8_t p, uint8_t d);
   void pullUp(uint8_t p, uint8_t d);
   uint8_t digitalRead(uint8_t p);
 
   void writeGPIOAB(uint16_t);
+  void writeGPIO(uint8_t b, uint8_t d);
   uint16_t readGPIOAB();
   uint8_t readGPIO(uint8_t b);
 
@@ -61,6 +64,10 @@ private:
 };
 
 #define MCP23017_ADDRESS 0x20 //!< MCP23017 Address
+
+// ports
+#define MCP23017_PORT_A 0x00
+#define MCP23017_PORT_B 0x01
 
 // registers
 #define MCP23017_IODIRA 0x00   //!< I/O direction register A
