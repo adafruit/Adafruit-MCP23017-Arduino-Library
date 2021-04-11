@@ -55,9 +55,7 @@ static inline uint8_t wirerecv(TwoWire *theWire) {
 /**
    Bit number associated to a give Pin
 */
-uint8_t Adafruit_MCP23017::bitForPin(uint8_t pin) {
-  return pin % 8;
-}
+uint8_t Adafruit_MCP23017::bitForPin(uint8_t pin) { return pin % 8; }
 
 /**
    Register address, port dependent, for a given PIN
@@ -96,8 +94,8 @@ void Adafruit_MCP23017::writeRegister(uint8_t regAddr, uint8_t regValue) {
    - Writes the new register value
 */
 void Adafruit_MCP23017::updateRegisterBit(uint8_t pin, uint8_t pValue,
-    uint8_t portAaddr,
-    uint8_t portBaddr) {
+                                          uint8_t portAaddr,
+                                          uint8_t portBaddr) {
   uint8_t regValue;
   uint8_t regAddr = regForPin(pin, portAaddr, portBaddr);
   uint8_t bit = bitForPin(pin);
@@ -145,9 +143,7 @@ void Adafruit_MCP23017::begin(uint8_t addr, TwoWire *theWire) {
    address
    @param theWire the I2C object to use, defaults to &Wire
 */
-void Adafruit_MCP23017::begin(TwoWire *theWire) {
-  begin(0, theWire);
-}
+void Adafruit_MCP23017::begin(TwoWire *theWire) { begin(0, theWire); }
 
 /**
    Sets the pin mode to either INPUT or OUTPUT
@@ -173,17 +169,17 @@ void Adafruit_MCP23017::portMode(uint8_t b, uint8_t d) {
   }
 
   switch (d) {
-    case INPUT:
-      writeRegister(addrIODIR, 0xff);
-      writeRegister(addrGPPU, 0x00);
-      break;
-    case INPUT_PULLUP:
-      writeRegister(addrIODIR, 0xff);
-      writeRegister(addrGPPU, 0xff);
-      break;
-    case OUTPUT:
-      writeRegister(addrIODIR, 0x00);
-      break;
+  case INPUT:
+    writeRegister(addrIODIR, 0xff);
+    writeRegister(addrGPPU, 0x00);
+    break;
+  case INPUT_PULLUP:
+    writeRegister(addrIODIR, 0xff);
+    writeRegister(addrGPPU, 0xff);
+    break;
+  case OUTPUT:
+    writeRegister(addrIODIR, 0x00);
+    break;
   }
 }
 
@@ -201,8 +197,7 @@ void Adafruit_MCP23017::portPolarity(uint8_t b, uint8_t d) {
 
   if (d == 0) { // non-inverted
     writeRegister(addrIPOL, 0x00);
-  }
-  else {        // inverted
+  } else { // inverted
     writeRegister(addrIPOL, 0xff);
   }
 }
