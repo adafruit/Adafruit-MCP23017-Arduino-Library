@@ -66,8 +66,8 @@ private:
 #define MCP23017_ADDRESS 0x20 //!< MCP23017 Address
 
 // ports
-#define MCP23017_PORT_A 0x00   //!< Port A used for port methods
-#define MCP23017_PORT_B 0x01   //!< Port B used for port methods
+#define MCP23017_PORT_A 0x00 //!< Port A used for port methods
+#define MCP23017_PORT_B 0x01 //!< Port B used for port methods
 
 // registers
 #define MCP23017_IODIRA 0x00   //!< I/O direction register A
