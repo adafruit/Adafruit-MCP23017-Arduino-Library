@@ -39,7 +39,6 @@ void loop() {
     uint8_t keyPressed = 0;
 
     for (uint8_t row = 0; row < 8; row++) {
-      uint8_t q = ~(0x01 << row);
       mcp.writeGPIO(MCP23017_PORT_A, ~(0x01 << row)); // write rowScan to Port A to set row to 0 (low)
 
       uint8_t scanValue = mcp.readGPIO(MCP23017_PORT_B);
