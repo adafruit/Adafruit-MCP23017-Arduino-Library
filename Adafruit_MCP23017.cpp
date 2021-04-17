@@ -151,8 +151,9 @@ void Adafruit_MCP23017::begin(TwoWire *theWire) { begin(0, theWire); }
  * @param d Mode to set the pin
  */
 void Adafruit_MCP23017::pinMode(uint8_t p, uint8_t d) {
-  updateRegisterBit(p, (d == INPUT || d == INPUT_PULLUP), MCP23017_IODIRA, MCP23017_IODIRB);
-  if(d == INPUT || d == INPUT_PULLUP)
+  updateRegisterBit(p, (d == INPUT || d == INPUT_PULLUP), MCP23017_IODIRA,
+                    MCP23017_IODIRB);
+  if (d == INPUT || d == INPUT_PULLUP) {
   {
     updateRegisterBit(p, (d == INPUT_PULLUP), MCP23017_GPPUA, MCP23017_GPPUB);
   }
