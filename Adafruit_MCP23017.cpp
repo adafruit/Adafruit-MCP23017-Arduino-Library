@@ -197,6 +197,47 @@ uint8_t Adafruit_MCP23017::readGPIO(uint8_t b) {
 }
 
 /**
+ * Reads all 16 pins output state (OLAT register) into a single 16 bits variable.
+ */
+uint16_t Adafruit_MCP23017::readOutputsAB() {
+  uint16_t ba = 0;
+  uint8_t a;
+
+  // read the current OLAT output latches
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  wiresend(MCP23017_OLATA, _wire);
+  _wire->endTransmission();
+
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 2);
+  a = wirerecv(_wire);
+  ba = wirerecv(_wire);
+  ba <<= 8;
+  ba |= a;
+
+  return ba;
+}
+
+/**
+ * Read output state of a single port, A or B, and return its current 8 bit value.
+ * @param b Decided what gpio to use. Should be 0 for GPIOA, and 1 for GPIOB.
+ * @return Returns the b bit value of the port
+ */
+uint8_t Adafruit_MCP23017::readOutputs(uint8_t b) {
+
+  // read the current OLAT output latches
+  _wire->beginTransmission(MCP23017_ADDRESS | i2caddr);
+  if (b == 0)
+    wiresend(MCP23017_OLATA, _wire);
+  else {
+    wiresend(MCP23017_OLATB, _wire);
+  }
+  _wire->endTransmission();
+
+  _wire->requestFrom(MCP23017_ADDRESS | i2caddr, 1);
+  return wirerecv(_wire);
+}
+
+/**
  * Writes all the pins in one go. This method is very useful if you are
  * implementing a multiplexed matrix and want to get a decent refresh rate.
  */

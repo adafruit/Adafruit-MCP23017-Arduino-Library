@@ -34,6 +34,8 @@ public:
   void writeGPIOAB(uint16_t);
   uint16_t readGPIOAB();
   uint8_t readGPIO(uint8_t b);
+  uint16_t readOutputsAB();
+  uint8_t readOutputs(uint8_t b);
 
   void setupInterrupts(uint8_t mirroring, uint8_t open, uint8_t polarity);
   void setupInterruptPin(uint8_t pin, uint8_t mode);
