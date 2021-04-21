@@ -197,7 +197,8 @@ uint8_t Adafruit_MCP23017::readGPIO(uint8_t b) {
 }
 
 /**
- * Reads all 16 pins output state (OLAT register) into a single 16 bits variable.
+ * Reads all 16 pins output state (OLAT register) into a single 16 bits 
+ * variable.
  */
 uint16_t Adafruit_MCP23017::readOutputsAB() {
   uint16_t ba = 0;
@@ -218,7 +219,8 @@ uint16_t Adafruit_MCP23017::readOutputsAB() {
 }
 
 /**
- * Read output state of a single port, A or B, and return its current 8 bit value.
+ * Read output state of a single port, A or B, and return its current 8 bit 
+ * value.
  * @param b Decided what gpio to use. Should be 0 for GPIOA, and 1 for GPIOB.
  * @return Returns the b bit value of the port
  */
