@@ -1,41 +1,36 @@
 # Adafruit MCP23017 Arduino Library [![Build Status](https://github.com/adafruit/Adafruit-MCP23017-Arduino-Library/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit-MCP23017-Arduino-Library/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit-MCP23017-Arduino-Library/html/index.html)
 
-This is a library for the MCP23017 I2c Port Expander
- 
-These chips use I2C to communicate, 2 pins required to interface
+This is a library for the MCP23008/17 I2C and MCP23S08/17 SPI Port Expanders.
 
-Adafruit invests time and resources providing this open source code, 
-please support Adafruit and open-source hardware by purchasing 
+Adafruit invests time and resources providing this open source code,
+please support Adafruit and open-source hardware by purchasing
 products from Adafruit!
 
-Written by Limor Fried/Ladyada  for Adafruit Industries.  
+Written by Carter Nelson for Adafruit Industries.
 BSD license, check license.txt for more information
 All text above must be included in any redistribution
 
-To download. click the DOWNLOADS button in the top right corner, rename the uncompressed folder Adafruit_MCP23017. Check that the Adafruit_MCP23017 folder contains Adafruit_MCP23017.cpp and Adafruit_MCP23017.h
+To install, use the Arduino IDE Library Manager.
 
-Place the Adafruit_MCP23017 library folder your <arduinosketchfolder>/libraries/ folder. You may need to create the libraries subfolder if its your first library. Restart the IDE.
+# Pin Addressing
 
-Pin Addressing
-==============
+When using single pin operations such as _pinMode(pinId, dir)_ or _digitalRead(pinId)_  or _digitalWrite(pinId, val)_ then the pins are addressed using the ID's below. For example, for set the mode of _GPB0_ then use _pinMode(8, ...)_. **NOTE** The MCP23008 and MCP23S08 only have _GPAx_ pins.
 
-When using single pin operations such as _pinMode(pinId, dir)_ or _digitalRead(pinId)_  or _digitalWrite(pinId, val)_ then the pins are addressed using the ID's below. For example, for set the mode of _GPB0_ then use _pinMode(8, ...)_.
-
-Physical Pin #| Pin Name | Pin ID
-----|------|------------------------------
-21 | GPA0 | 0
-22 | GPA1 | 1
-23 | GPA2 | 2
-24 | GPA3 | 3
-25 | GPA4 | 4
-26 | GPA5 | 5
-27 | GPA6 | 6
-28 | GPA7 | 7
-1 | GPB0 |  8
-2 | GPB1 |  9
-3 | GPB2 | 10
-4 | GPB3 | 11
-5 | GPB4 | 12
-6 | GPB5 | 13
-7 | GPB6 | 14
-8 | GPB7 | 15
+MCP23x08 Pin # | MCP23x17 Pin # | Pin Name | Pin ID
+:-------------:|:--------------:|:--------:|:-------:
+10 | 21 | GPA0 | 0
+11 | 22 | GPA1 | 1
+12 | 23 | GPA2 | 2
+13 | 24 | GPA3 | 3
+14 | 25 | GPA4 | 4
+15 | 26 | GPA5 | 5
+16 | 27 | GPA6 | 6
+17 | 28 | GPA7 | 7
+-- |  1 | GPB0 |  8
+-- |  2 | GPB1 |  9
+-- |  3 | GPB2 | 10
+-- |  4 | GPB3 | 11
+-- |  5 | GPB4 | 12
+-- |  6 | GPB5 | 13
+-- |  7 | GPB6 | 14
+-- |  8 | GPB7 | 15
