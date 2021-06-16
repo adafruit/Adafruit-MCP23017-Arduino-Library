@@ -27,6 +27,4 @@
   @brief default ctor.
 */
 /**************************************************************************/
-Adafruit_MCP23X08::Adafruit_MCP23X08() {
-  pinCount = 8;
-}
+Adafruit_MCP23X08::Adafruit_MCP23X08() { pinCount = 8; }

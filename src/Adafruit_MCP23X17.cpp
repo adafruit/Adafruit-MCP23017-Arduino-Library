@@ -27,9 +27,7 @@
   @brief default ctor.
 */
 /**************************************************************************/
-Adafruit_MCP23X17::Adafruit_MCP23X17() {
-  pinCount = 16;
-}
+Adafruit_MCP23X17::Adafruit_MCP23X17() { pinCount = 16; }
 
 /**************************************************************************/
 /*!
@@ -37,9 +35,7 @@ Adafruit_MCP23X17::Adafruit_MCP23X17() {
   @returns current pin states of port as a uint8_t.
 */
 /**************************************************************************/
-uint8_t Adafruit_MCP23X17::readGPIOA() {
-  return readGPIO(0);
-}
+uint8_t Adafruit_MCP23X17::readGPIOA() { return readGPIO(0); }
 
 /**************************************************************************/
 /*!
@@ -47,9 +43,7 @@ uint8_t Adafruit_MCP23X17::readGPIOA() {
   @param value pin states to write as uint8_t.
 */
 /**************************************************************************/
-void Adafruit_MCP23X17::writeGPIOA(uint8_t value) {
-  writeGPIO(value, 0);
-}
+void Adafruit_MCP23X17::writeGPIOA(uint8_t value) { writeGPIO(value, 0); }
 
 /**************************************************************************/
 /*!
@@ -57,9 +51,7 @@ void Adafruit_MCP23X17::writeGPIOA(uint8_t value) {
   @returns current pin states of port as a uint8_t.
 */
 /**************************************************************************/
-uint8_t Adafruit_MCP23X17::readGPIOB() {
-  return readGPIO(1);
-}
+uint8_t Adafruit_MCP23X17::readGPIOB() { return readGPIO(1); }
 
 /**************************************************************************/
 /*!
@@ -67,9 +59,7 @@ uint8_t Adafruit_MCP23X17::readGPIOB() {
   @param value pin states to write as uint8_t.
 */
 /**************************************************************************/
-void Adafruit_MCP23X17::writeGPIOB(uint8_t value) {
-  writeGPIO(value, 1);
-}
+void Adafruit_MCP23X17::writeGPIOB(uint8_t value) { writeGPIO(value, 1); }
 
 /**************************************************************************/
 /*!
@@ -90,4 +80,3 @@ uint16_t Adafruit_MCP23X17::readGPIOAB() {
 void Adafruit_MCP23X17::writeGPIOAB(uint16_t value) {
   writeRegister16(getRegister(MCP23XXX_GPIO), value);
 }
-

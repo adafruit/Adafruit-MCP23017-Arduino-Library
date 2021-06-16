@@ -12,7 +12,7 @@
     @brief  Class for MCP23017 I2C and MCP23S17 SPI variants.
 */
 /**************************************************************************/
-class Adafruit_MCP23X17: public Adafruit_MCP23XXX {
+class Adafruit_MCP23X17 : public Adafruit_MCP23XXX {
 public:
   Adafruit_MCP23X17();
 

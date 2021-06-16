@@ -44,7 +44,8 @@ bool Adafruit_MCP23XXX::begin_I2C(uint8_t i2c_addr, TwoWire *wire) {
 */
 /**************************************************************************/
 bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI) {
-  spi_dev = new Adafruit_SPIDevice(cs_pin, 1000000, SPI_BITORDER_MSBFIRST, SPI_MODE0, theSPI);
+  spi_dev = new Adafruit_SPIDevice(cs_pin, 1000000, SPI_BITORDER_MSBFIRST,
+                                   SPI_MODE0, theSPI);
   return spi_dev->begin();
 }
 
@@ -58,8 +59,8 @@ bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI) {
   @return true if initialization successful, otherwise false.
 */
 /**************************************************************************/
-bool Adafruit_MCP23XXX::begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
-                 int8_t mosi_pin) {
+bool Adafruit_MCP23XXX::begin_SPI(int8_t cs_pin, int8_t sck_pin,
+                                  int8_t miso_pin, int8_t mosi_pin) {
   spi_dev = new Adafruit_SPIDevice(cs_pin, sck_pin, miso_pin, mosi_pin);
   return spi_dev->begin();
 }
@@ -105,7 +106,8 @@ void Adafruit_MCP23XXX::pinMode(uint8_t pin, uint8_t mode) {
 */
 /**************************************************************************/
 uint8_t Adafruit_MCP23XXX::digitalRead(uint8_t pin) {
-  if (pin >= pinCount) return 0;
+  if (pin >= pinCount)
+    return 0;
   return ((readGPIO(PORT(pin)) & MASK(pin)) == 0) ? LOW : HIGH;
 }
 
@@ -156,11 +158,21 @@ void Adafruit_MCP23XXX::writeGPIO(uint8_t value, uint8_t port) {
   @param polarity HIGH or LOW
 */
 /**************************************************************************/
-void Adafruit_MCP23XXX::setupInterrupts(bool mirroring, bool openDrain, uint8_t polarity) {
+void Adafruit_MCP23XXX::setupInterrupts(bool mirroring, bool openDrain,
+                                        uint8_t polarity) {
   uint8_t iocon = readRegister(getRegister(MCP23XXX_IOCON));
-  if (mirroring) iocon |= 1 << 6; else iocon &= ~(1 << 6);
-  if (openDrain) iocon |= 1 << 2; else iocon &= ~(1 << 2);
-  if (polarity == HIGH) iocon |= 1 << 1; else iocon &= ~(1 << 1);
+  if (mirroring)
+    iocon |= 1 << 6;
+  else
+    iocon &= ~(1 << 6);
+  if (openDrain)
+    iocon |= 1 << 2;
+  else
+    iocon &= ~(1 << 2);
+  if (polarity == HIGH)
+    iocon |= 1 << 1;
+  else
+    iocon &= ~(1 << 1);
   writeRegister(getRegister(MCP23XXX_IOCON), iocon);
 }
 
@@ -191,7 +203,10 @@ void Adafruit_MCP23XXX::setupInterruptPin(uint8_t pin, uint8_t mode) {
     // set DEFVAL to 1=LOW or 0=HIGH
     reg = getRegister(MCP23XXX_DEFVAL, PORT(pin));
     uint8_t defval = readRegister(reg);
-    if (mode == LOW) defval |= MASK(pin); else defval &= ~MASK(pin);
+    if (mode == LOW)
+      defval |= MASK(pin);
+    else
+      defval &= ~MASK(pin);
     writeRegister(reg, defval);
   }
 }
@@ -334,7 +349,8 @@ uint8_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
   if (pinCount > 8) {
     reg *= 2;
     // Port B
-    if (port) reg++;
+    if (port)
+      reg++;
   }
   return reg;
 }
