@@ -16,7 +16,7 @@ Adafruit_MCP23X08 mcp;
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial);
+  //while (!Serial);
   Serial.println("MCP23xxx Button Test!");
 
   // uncomment appropriate mcp.begin

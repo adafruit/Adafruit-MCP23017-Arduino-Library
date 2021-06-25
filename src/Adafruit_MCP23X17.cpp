@@ -68,7 +68,9 @@ void Adafruit_MCP23X17::writeGPIOB(uint8_t value) { writeGPIO(value, 1); }
 */
 /**************************************************************************/
 uint16_t Adafruit_MCP23X17::readGPIOAB() {
-  return readRegister16(getRegister(MCP23XXX_GPIO));
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, 0), 2);
+  return GPIO.read();
 }
 
 /**************************************************************************/
@@ -78,5 +80,7 @@ uint16_t Adafruit_MCP23X17::readGPIOAB() {
 */
 /**************************************************************************/
 void Adafruit_MCP23X17::writeGPIOAB(uint16_t value) {
-  writeRegister16(getRegister(MCP23XXX_GPIO), value);
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, 0), 2);
+  GPIO.write(value, 2);
 }

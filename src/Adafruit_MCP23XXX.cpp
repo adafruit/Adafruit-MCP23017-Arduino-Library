@@ -73,29 +73,15 @@ bool Adafruit_MCP23XXX::begin_SPI(int8_t cs_pin, int8_t sck_pin,
 */
 /**************************************************************************/
 void Adafruit_MCP23XXX::pinMode(uint8_t pin, uint8_t mode) {
-  uint8_t iodir_reg = getRegister(MCP23XXX_IODIR, PORT(pin));
-  uint8_t gppu_reg = getRegister(MCP23XXX_GPPU, PORT(pin));
+  Adafruit_BusIO_Register IODIR(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                getRegister(MCP23XXX_IODIR, MCP_PORT(pin)));
+  Adafruit_BusIO_Register GPPU(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPPU, MCP_PORT(pin)));
+  Adafruit_BusIO_RegisterBits dir_bit(&IODIR, 1, pin % 8);
+  Adafruit_BusIO_RegisterBits pullup_bit(&GPPU, 1, pin % 8);
 
-  uint8_t iodir = readRegister(iodir_reg);
-
-  if (mode == OUTPUT) {
-    // clear for output
-    iodir &= ~MASK(pin);
-  } else {
-    // set for input
-    iodir |= MASK(pin);
-    // also configure internal pull-up
-    uint8_t gppu = readRegister(gppu_reg);
-    if (mode == INPUT_PULLUP) {
-      // set to enable
-      gppu |= MASK(pin);
-    } else {
-      // clear to disable
-      gppu &= ~MASK(pin);
-    }
-    writeRegister(gppu_reg, gppu);
-  }
-  writeRegister(iodir_reg, iodir);
+  dir_bit.write((mode == OUTPUT) ? 0 : 1);
+  pullup_bit.write((mode == INPUT_PULLUP) ? 1 : 0);
 }
 
 /**************************************************************************/
@@ -106,9 +92,11 @@ void Adafruit_MCP23XXX::pinMode(uint8_t pin, uint8_t mode) {
 */
 /**************************************************************************/
 uint8_t Adafruit_MCP23XXX::digitalRead(uint8_t pin) {
-  if (pin >= pinCount)
-    return 0;
-  return ((readGPIO(PORT(pin)) & MASK(pin)) == 0) ? LOW : HIGH;
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, MCP_PORT(pin)));
+  Adafruit_BusIO_RegisterBits pin_bit(&GPIO, 1, pin % 8);
+
+  return ((pin_bit.read() == 0) ? LOW : HIGH);
 }
 
 /**************************************************************************/
@@ -119,13 +107,11 @@ uint8_t Adafruit_MCP23XXX::digitalRead(uint8_t pin) {
 */
 /**************************************************************************/
 void Adafruit_MCP23XXX::digitalWrite(uint8_t pin, uint8_t value) {
-  uint8_t gpio = readGPIO(PORT(pin));
-  if (value == HIGH) {
-    gpio |= MASK(pin);
-  } else {
-    gpio &= ~MASK(pin);
-  }
-  writeGPIO(gpio, PORT(pin));
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, MCP_PORT(pin)));
+  Adafruit_BusIO_RegisterBits pin_bit(&GPIO, 1, pin % 8);
+
+  pin_bit.write((value == LOW) ? 0 : 1);
 }
 
 /**************************************************************************/
@@ -136,7 +122,9 @@ void Adafruit_MCP23XXX::digitalWrite(uint8_t pin, uint8_t value) {
 */
 /**************************************************************************/
 uint8_t Adafruit_MCP23XXX::readGPIO(uint8_t port) {
-  return readRegister(getRegister(MCP23XXX_GPIO, port));
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, port));
+  return GPIO.read() & 0xFF;
 }
 
 /**************************************************************************/
@@ -147,7 +135,9 @@ uint8_t Adafruit_MCP23XXX::readGPIO(uint8_t port) {
 */
 /**************************************************************************/
 void Adafruit_MCP23XXX::writeGPIO(uint8_t value, uint8_t port) {
-  writeRegister(getRegister(MCP23XXX_GPIO, port), value);
+  Adafruit_BusIO_Register GPIO(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                               getRegister(MCP23XXX_GPIO, port));
+  GPIO.write(value);
 }
 
 /**************************************************************************/
@@ -160,20 +150,15 @@ void Adafruit_MCP23XXX::writeGPIO(uint8_t value, uint8_t port) {
 /**************************************************************************/
 void Adafruit_MCP23XXX::setupInterrupts(bool mirroring, bool openDrain,
                                         uint8_t polarity) {
-  uint8_t iocon = readRegister(getRegister(MCP23XXX_IOCON));
-  if (mirroring)
-    iocon |= 1 << 6;
-  else
-    iocon &= ~(1 << 6);
-  if (openDrain)
-    iocon |= 1 << 2;
-  else
-    iocon &= ~(1 << 2);
-  if (polarity == HIGH)
-    iocon |= 1 << 1;
-  else
-    iocon &= ~(1 << 1);
-  writeRegister(getRegister(MCP23XXX_IOCON), iocon);
+  Adafruit_BusIO_Register GPINTEN(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                  getRegister(MCP23XXX_IOCON));
+  Adafruit_BusIO_RegisterBits mirror_bit(&GPINTEN, 1, 6);
+  Adafruit_BusIO_RegisterBits openDrain_bit(&GPINTEN, 1, 2);
+  Adafruit_BusIO_RegisterBits polarity_bit(&GPINTEN, 1, 1);
+
+  mirror_bit.write(mirroring ? 1 : 0);
+  openDrain_bit.write(openDrain ? 1 : 0);
+  polarity_bit.write((polarity == HIGH) ? 1 : 0);
 }
 
 /**************************************************************************/
@@ -184,31 +169,19 @@ void Adafruit_MCP23XXX::setupInterrupts(bool mirroring, bool openDrain,
 */
 /**************************************************************************/
 void Adafruit_MCP23XXX::setupInterruptPin(uint8_t pin, uint8_t mode) {
-  // enable it
-  uint8_t reg = getRegister(MCP23XXX_GPINTEN, PORT(pin));
-  uint8_t gpinten = readRegister(reg);
-  gpinten |= MASK(pin);
-  writeRegister(reg, gpinten);
-  // set mode
-  reg = getRegister(MCP23XXX_INTCON, PORT(pin));
-  uint8_t intcon = readRegister(reg);
-  if (mode == CHANGE) {
-    // clear to compare to previous self (CHANGE)
-    intcon &= ~MASK(pin);
-    writeRegister(reg, intcon);
-  } else {
-    // set to compare to DEFVAL (LOW/HIGH)
-    intcon |= MASK(pin);
-    writeRegister(reg, intcon);
-    // set DEFVAL to 1=LOW or 0=HIGH
-    reg = getRegister(MCP23XXX_DEFVAL, PORT(pin));
-    uint8_t defval = readRegister(reg);
-    if (mode == LOW)
-      defval |= MASK(pin);
-    else
-      defval &= ~MASK(pin);
-    writeRegister(reg, defval);
-  }
+  Adafruit_BusIO_Register GPINTEN(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                  getRegister(MCP23XXX_GPINTEN, MCP_PORT(pin)));
+  Adafruit_BusIO_Register INTCON(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                 getRegister(MCP23XXX_INTCON, MCP_PORT(pin)));
+  Adafruit_BusIO_Register DEFVAL(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                 getRegister(MCP23XXX_DEFVAL, MCP_PORT(pin)));
+  Adafruit_BusIO_RegisterBits enable_bit(&GPINTEN, 1, pin % 8);
+  Adafruit_BusIO_RegisterBits config_bit(&INTCON, 1, pin % 8);
+  Adafruit_BusIO_RegisterBits defval_bit(&DEFVAL, 1, pin % 8);
+
+  enable_bit.write(1);                        // enable it
+  config_bit.write((mode == CHANGE) ? 0 : 1); // set mode
+  defval_bit.write((mode == LOW) ? 1 : 0);    // set defval
 }
 
 /**************************************************************************/
@@ -218,10 +191,11 @@ void Adafruit_MCP23XXX::setupInterruptPin(uint8_t pin, uint8_t mode) {
 */
 /**************************************************************************/
 void Adafruit_MCP23XXX::disableInterruptPin(uint8_t pin) {
-  uint8_t reg = getRegister(MCP23XXX_GPINTEN, PORT(pin));
-  uint8_t gpinten = readRegister(reg);
-  gpinten &= ~MASK(pin);
-  writeRegister(reg, gpinten);
+  Adafruit_BusIO_Register GPINTEN(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                  getRegister(MCP23XXX_GPINTEN, MCP_PORT(pin)));
+  Adafruit_BusIO_RegisterBits enable_bit(&GPINTEN, 1, pin % 8);
+
+  enable_bit.write(0);
 }
 
 /**************************************************************************/
@@ -231,18 +205,25 @@ void Adafruit_MCP23XXX::disableInterruptPin(uint8_t pin) {
 */
 /**************************************************************************/
 uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
-  uint8_t intf = readRegister(getRegister(MCP23XXX_INTF));
   uint8_t intpin = 255;
+  uint8_t intf;
+
   // Port A
+  Adafruit_BusIO_Register INTFA(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                getRegister(MCP23XXX_INTF));
+  INTFA.read(&intf);
   for (uint8_t pin = 0; pin < 8; pin++) {
     if (intf & (1 << pin)) {
       intpin = pin;
       break;
     }
   }
-  // Port B
-  if ((pinCount > 8) && (intpin != 255)) {
-    intf = readRegister(getRegister(MCP23XXX_INTF, 1));
+
+  // Port B and still not found?
+  if ((pinCount > 8) && (intpin == 255)) {
+    Adafruit_BusIO_Register INTFB(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                  getRegister(MCP23XXX_INTF), 1);
+    INTFB.read(&intf);
     for (uint8_t pin = 0; pin < 8; pin++) {
       if (intf & (1 << pin)) {
         intpin = pin + 8;
@@ -250,89 +231,15 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
       }
     }
   }
-  // read INTCAP to clear
-  readRegister(getRegister(MCP23XXX_INTCAP));
+
+  // clear if found
+  if (intpin != 255) {
+    Adafruit_BusIO_Register INTCAP(i2c_dev, spi_dev, MCP23XXX_SPIREG,
+                                   getRegister(MCP23XXX_INTCAP));
+    INTCAP.read();
+  }
+
   return intpin;
-}
-
-/**************************************************************************/
-/*!
-  @brief read register
-  @param addr register address
-  @returns register value
-*/
-/**************************************************************************/
-uint8_t Adafruit_MCP23XXX::readRegister(uint8_t addr) {
-  if (i2c_dev) {
-    buffer[0] = addr;
-    i2c_dev->write_then_read(buffer, 1, buffer, 1, false);
-  } else if (spi_dev) {
-    buffer[0] = MCP23XXX_SPI_READ;
-    buffer[1] = addr;
-    spi_dev->write_then_read(buffer, 2, buffer, 1);
-  }
-  return buffer[0];
-}
-
-/**************************************************************************/
-/*!
-  @brief write register
-  @param addr register address
-  @param value value to write
-*/
-/**************************************************************************/
-void Adafruit_MCP23XXX::writeRegister(uint8_t addr, uint8_t value) {
-  if (i2c_dev) {
-    buffer[0] = addr;
-    buffer[1] = value;
-    i2c_dev->write(buffer, 2);
-  } else if (spi_dev) {
-    buffer[0] = MCP23XXX_SPI_WRITE;
-    buffer[1] = addr;
-    buffer[2] = value;
-    spi_dev->write(buffer, 3);
-  }
-}
-
-/**************************************************************************/
-/*!
-  @brief read two consecutive registers
-  @param addr first register address
-  @returns register values, first register in lower byte
-*/
-/**************************************************************************/
-uint16_t Adafruit_MCP23XXX::readRegister16(uint8_t addr) {
-  if (i2c_dev) {
-    buffer[0] = addr;
-    i2c_dev->write_then_read(buffer, 1, buffer, 2, false);
-  } else if (spi_dev) {
-    buffer[0] = MCP23XXX_SPI_READ;
-    buffer[1] = addr;
-    spi_dev->write_then_read(buffer, 2, buffer, 2);
-  }
-  return buffer[0] | (buffer[1] << 1);
-}
-
-/**************************************************************************/
-/*!
-  @brief write two consecutive registers
-  @param addr first register address
-  @param value register values, first register in lower byte
-*/
-/**************************************************************************/
-void Adafruit_MCP23XXX::writeRegister16(uint8_t addr, uint16_t value) {
-  if (i2c_dev) {
-    buffer[0] = addr;
-    buffer[1] = value & 0xFF;
-    buffer[2] = (value >> 8) & 0xFF;
-    i2c_dev->write(buffer, 3);
-  } else if (spi_dev) {
-    buffer[0] = MCP23XXX_SPI_WRITE;
-    buffer[1] = addr;
-    buffer[2] = value & 0xFF;
-    buffer[3] = (value >> 8) & 0xFF;
-    spi_dev->write(buffer, 4);
-  }
 }
 
 /**************************************************************************/
@@ -342,9 +249,9 @@ void Adafruit_MCP23XXX::writeRegister16(uint8_t addr, uint16_t value) {
   @param port 0 for A, 1 for B (MCP23X17 only)
 */
 /**************************************************************************/
-uint8_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
+uint16_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
   // MCP23x08
-  uint8_t reg = baseAddress;
+  uint16_t reg = baseAddress;
   // MCP23x17 BANK=0
   if (pinCount > 8) {
     reg *= 2;
@@ -352,5 +259,6 @@ uint8_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
     if (port)
       reg++;
   }
-  return reg;
+  // for SPI, add opcode as high byte
+  return (spi_dev) ? (0x4000 | reg) : reg;
 }
