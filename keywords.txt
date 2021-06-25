@@ -6,13 +6,25 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-MCP23017	KEYWORD1
+Adafruit_MCP23X08	KEYWORD1
+Adafruit_MCP23X17	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-pullUp	KEYWORD2
+begin_I2C	KEYWORD2
+begin_SPI	KEYWORD2
+configureInterrupt	KEYWORD2
+enableInterrupt	KEYWORD2
+disableInterrupt	KEYWORD2
+getLastInterruptPin	KEYWORD2
+writeGPIO	KEYWORD2
+readGPIO	KEYWORD2
+writeGPIOA	KEYWORD2
+readGPIOA	KEYWORD2
+writeGPIOB	KEYWORD2
+readGPIOB	KEYWORD2
 writeGPIOAB	KEYWORD2
 readGPIOAB	KEYWORD2
 
