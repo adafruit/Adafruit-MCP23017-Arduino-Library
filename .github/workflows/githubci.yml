@@ -15,6 +15,9 @@ jobs:
       with:
          repository: adafruit/ci-arduino
          path: ci
+    
+    - name: move src contents to root
+      run: mv -v src/* .
 
     - name: pre-install
       run: bash ci/actions_install.sh
