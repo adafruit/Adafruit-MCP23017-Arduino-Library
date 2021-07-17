@@ -234,8 +234,9 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
 
   // clear if found
   if (intpin != 255) {
-    Adafruit_BusIO_Register INTCAP(i2c_dev, spi_dev, MCP23XXX_SPIREG,
-                                   getRegister(MCP23XXX_INTCAP, MCP_PORT(intpin)));
+    Adafruit_BusIO_Register INTCAP(
+        i2c_dev, spi_dev, MCP23XXX_SPIREG,
+        getRegister(MCP23XXX_INTCAP, MCP_PORT(intpin)));
     INTCAP.read();
   }
 
