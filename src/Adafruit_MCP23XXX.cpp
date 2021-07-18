@@ -144,7 +144,7 @@ void Adafruit_MCP23XXX::writeGPIO(uint8_t value, uint8_t port) {
 /*!
   @brief Configure the interrupt system.
   @param mirroring true to OR both INTA and INTB pins.
-  @param open true for open drain output, false for active drive output.
+  @param openDrain true for open drain output, false for active drive output.
   @param polarity HIGH or LOW
 */
 /**************************************************************************/
@@ -248,6 +248,7 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
   @brief helper to get register address
   @param baseAddress base register address
   @param port 0 for A, 1 for B (MCP23X17 only)
+  @returns calculated register address
 */
 /**************************************************************************/
 uint16_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
