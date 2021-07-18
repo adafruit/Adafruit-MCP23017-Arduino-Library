@@ -210,7 +210,7 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
 
   // Port A
   Adafruit_BusIO_Register INTFA(i2c_dev, spi_dev, MCP23XXX_SPIREG,
-                                getRegister(MCP23XXX_INTF));
+                                getRegister(MCP23XXX_INTF, 0));
   INTFA.read(&intf);
   for (uint8_t pin = 0; pin < 8; pin++) {
     if (intf & (1 << pin)) {
@@ -222,7 +222,7 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
   // Port B and still not found?
   if ((pinCount > 8) && (intpin == 255)) {
     Adafruit_BusIO_Register INTFB(i2c_dev, spi_dev, MCP23XXX_SPIREG,
-                                  getRegister(MCP23XXX_INTF), 1);
+                                  getRegister(MCP23XXX_INTF, 1));
     INTFB.read(&intf);
     for (uint8_t pin = 0; pin < 8; pin++) {
       if (intf & (1 << pin)) {
@@ -234,8 +234,9 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
 
   // clear if found
   if (intpin != 255) {
-    Adafruit_BusIO_Register INTCAP(i2c_dev, spi_dev, MCP23XXX_SPIREG,
-                                   getRegister(MCP23XXX_INTCAP));
+    Adafruit_BusIO_Register INTCAP(
+        i2c_dev, spi_dev, MCP23XXX_SPIREG,
+        getRegister(MCP23XXX_INTCAP, MCP_PORT(intpin)));
     INTCAP.read();
   }
 
