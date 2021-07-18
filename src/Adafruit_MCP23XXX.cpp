@@ -151,7 +151,7 @@ void Adafruit_MCP23XXX::writeGPIO(uint8_t value, uint8_t port) {
 void Adafruit_MCP23XXX::setupInterrupts(bool mirroring, bool openDrain,
                                         uint8_t polarity) {
   Adafruit_BusIO_Register IOCON(i2c_dev, spi_dev, MCP23XXX_SPIREG,
-                                  getRegister(MCP23XXX_IOCON));
+                                getRegister(MCP23XXX_IOCON));
   Adafruit_BusIO_RegisterBits mirror_bit(&IOCON, 1, 6);
   Adafruit_BusIO_RegisterBits openDrain_bit(&IOCON, 1, 2);
   Adafruit_BusIO_RegisterBits polarity_bit(&IOCON, 1, 1);
