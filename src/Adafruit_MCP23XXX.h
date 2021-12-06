@@ -39,9 +39,10 @@ class Adafruit_MCP23XXX {
 public:
   // init
   bool begin_I2C(uint8_t i2c_addr = MCP23XXX_ADDR, TwoWire *wire = &Wire);
-  bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI);
+  bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI,
+                 uint8_t _hw_addr = 0x00);
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
-                 int8_t mosi_pin);
+                 int8_t mosi_pin, uint8_t _hw_addr = 0x00);
 
   // main Arduino API methods
   void pinMode(uint8_t pin, uint8_t mode);
@@ -62,6 +63,7 @@ protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
   uint8_t pinCount;                   ///< Total number of GPIO pins
+  uint8_t hw_addr;                    ///< HW address matching A2/A1/A0 pins
   uint16_t getRegister(uint8_t baseAddress, uint8_t port = 0);
 
 private:
