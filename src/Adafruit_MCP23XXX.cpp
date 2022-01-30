@@ -202,9 +202,10 @@ void Adafruit_MCP23XXX::disableInterruptPin(uint8_t pin) {
 /*!
   @brief Gets the last interrupt pin.
   @returns Pin that caused last interrupt.
+  @param value will be updated with the value that caused the interrupt
 */
 /**************************************************************************/
-uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
+uint8_t Adafruit_MCP23XXX::getLastInterruptPin(uint8_t *value = NULL) {
   uint8_t intpin = 255;
   uint8_t intf;
 
@@ -237,7 +238,8 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
     Adafruit_BusIO_Register INTCAP(
         i2c_dev, spi_dev, MCP23XXX_SPIREG,
         getRegister(MCP23XXX_INTCAP, MCP_PORT(intpin)));
-    INTCAP.read();
+    INTCAP.read(value);
+    if(value) { *value=(*value>>intpin)&0x1; }
   }
 
   return intpin;

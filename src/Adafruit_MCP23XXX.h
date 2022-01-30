@@ -56,7 +56,7 @@ public:
   void setupInterrupts(bool mirroring, bool openDrain, uint8_t polarity);
   void setupInterruptPin(uint8_t pin, uint8_t mode = CHANGE);
   void disableInterruptPin(uint8_t pin);
-  uint8_t getLastInterruptPin();
+  uint8_t getLastInterruptPin(uint8_t *value = NULL);
 
 protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
