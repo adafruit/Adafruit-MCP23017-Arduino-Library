@@ -239,7 +239,7 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin(uint8_t *value = NULL) {
         i2c_dev, spi_dev, MCP23XXX_SPIREG,
         getRegister(MCP23XXX_INTCAP, MCP_PORT(intpin)));
     INTCAP.read(value);
-    if(value) { *value=(*value>>intpin)&0x1; }
+    if(value) { *value=(*value>>(intpin%8))&0x1; }
   }
 
   return intpin;
