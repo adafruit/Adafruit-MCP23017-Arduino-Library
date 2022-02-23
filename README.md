@@ -34,3 +34,8 @@ MCP23x08 Pin # | MCP23x17 Pin # | Pin Name | Pin ID
 -- |  6 | GPB5 | 13
 -- |  7 | GPB6 | 14
 -- |  8 | GPB7 | 15
+
+# Warning
+
+Some people have reported an undocumented bug that can potentially corrupt the I2C bus.
+It occurs if an MCP230XX input pin state changes during I2C readout. **This should be very rare.** For more information, see this [forum post](https://www.microchip.com/forums/m646539.aspx) and this [knowledge base article](https://microchipsupport.force.com/s/article/On-MCP23008-MCP23017-SDA-line-change-when-GPIO7-input-change>).
