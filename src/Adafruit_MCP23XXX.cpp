@@ -40,10 +40,13 @@ bool Adafruit_MCP23XXX::begin_I2C(uint8_t i2c_addr, TwoWire *wire) {
   @brief Initialize MCP using hardware SPI.
   @param cs_pin Pin to use for SPI chip select
   @param theSPI Pointer to SPI instance
+  @param _hw_addr Hardware address (pins A2, A1, A0)
   @return true if initialization successful, otherwise false.
 */
 /**************************************************************************/
-bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI) {
+bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI,
+                                  uint8_t _hw_addr) {
+  this->hw_addr = _hw_addr;
   spi_dev = new Adafruit_SPIDevice(cs_pin, 1000000, SPI_BITORDER_MSBFIRST,
                                    SPI_MODE0, theSPI);
   return spi_dev->begin();
@@ -56,18 +59,22 @@ bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI) {
   @param sck_pin Pin to use for SPI clock
   @param miso_pin Pin to use for SPI MISO
   @param mosi_pin Pin to use for SPI MOSI
+  @param _hw_addr Hardware address (pins A2, A1, A0)
   @return true if initialization successful, otherwise false.
 */
 /**************************************************************************/
 bool Adafruit_MCP23XXX::begin_SPI(int8_t cs_pin, int8_t sck_pin,
-                                  int8_t miso_pin, int8_t mosi_pin) {
+                                  int8_t miso_pin, int8_t mosi_pin,
+                                  uint8_t _hw_addr) {
+  this->hw_addr = _hw_addr;
   spi_dev = new Adafruit_SPIDevice(cs_pin, sck_pin, miso_pin, mosi_pin);
   return spi_dev->begin();
 }
 
 /**************************************************************************/
 /*!
-  @brief Configures the specified pin to behave either as an input or an output.
+  @brief Configures the specified pin to behave either as an input or an
+  output.
   @param pin the Arduino pin number to set the mode of
   @param mode INPUT, OUTPUT, or INPUT_PULLUP
 */
@@ -262,5 +269,5 @@ uint16_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
       reg++;
   }
   // for SPI, add opcode as high byte
-  return (spi_dev) ? (0x4000 | reg) : reg;
+  return (spi_dev) ? (0x4000 | (hw_addr << 9) | reg) : reg;
 }

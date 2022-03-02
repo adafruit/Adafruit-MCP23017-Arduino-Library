@@ -22,6 +22,7 @@ public:
   void writeGPIOB(uint8_t value);
   uint16_t readGPIOAB();
   void writeGPIOAB(uint16_t value);
+  void enableAddrPins();
 };
 
 #endif
