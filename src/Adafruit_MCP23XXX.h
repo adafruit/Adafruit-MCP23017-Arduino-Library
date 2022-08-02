@@ -30,6 +30,8 @@
 
 #define MCP_PORT(pin) ((pin < 8) ? 0 : 1) //!< Determine port from pin number
 
+#define MCP23XXX_INT_ERR 255 //!< Interrupt error
+
 /**************************************************************************/
 /*!
     @brief  Base class for all MCP23XXX variants.
@@ -57,7 +59,9 @@ public:
   void setupInterrupts(bool mirroring, bool openDrain, uint8_t polarity);
   void setupInterruptPin(uint8_t pin, uint8_t mode = CHANGE);
   void disableInterruptPin(uint8_t pin);
+  void clearInterrupts();
   uint8_t getLastInterruptPin();
+  uint16_t getCapturedInterrupt();
 
 protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
