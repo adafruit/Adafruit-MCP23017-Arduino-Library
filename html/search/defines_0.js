@@ -5,6 +5,7 @@ var searchData=
   ['mcp23xxx_5fgpinten',['MCP23XXX_GPINTEN',['../_adafruit___m_c_p23_x_x_x_8h.html#a34c2b953aa0dd8da73f2ca95636ba356',1,'Adafruit_MCP23XXX.h']]],
   ['mcp23xxx_5fgpio',['MCP23XXX_GPIO',['../_adafruit___m_c_p23_x_x_x_8h.html#a14edd28e979c9bf42412a92babb7080a',1,'Adafruit_MCP23XXX.h']]],
   ['mcp23xxx_5fgppu',['MCP23XXX_GPPU',['../_adafruit___m_c_p23_x_x_x_8h.html#a160a3d7b885b3a5068ccc1063c19fe79',1,'Adafruit_MCP23XXX.h']]],
+  ['mcp23xxx_5fint_5ferr',['MCP23XXX_INT_ERR',['../_adafruit___m_c_p23_x_x_x_8h.html#a71b7d55764b6f9c7c7d330329f1ffd3e',1,'Adafruit_MCP23XXX.h']]],
   ['mcp23xxx_5fintcap',['MCP23XXX_INTCAP',['../_adafruit___m_c_p23_x_x_x_8h.html#a5c6ccc5e95d0a6b670afc2f3d2c57f30',1,'Adafruit_MCP23XXX.h']]],
   ['mcp23xxx_5fintcon',['MCP23XXX_INTCON',['../_adafruit___m_c_p23_x_x_x_8h.html#ac6b3bf9876dee40bceb564c814b285cd',1,'Adafruit_MCP23XXX.h']]],
   ['mcp23xxx_5fintf',['MCP23XXX_INTF',['../_adafruit___m_c_p23_x_x_x_8h.html#adbc8c0af77c0d537fdd0be0e007b9bcd',1,'Adafruit_MCP23XXX.h']]],
