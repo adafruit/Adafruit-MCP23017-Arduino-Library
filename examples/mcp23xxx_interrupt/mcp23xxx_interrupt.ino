@@ -55,6 +55,12 @@ void loop() {
   if (!digitalRead(INT_PIN)) {
     Serial.print("Interrupt detected on pin: ");
     Serial.println(mcp.getLastInterruptPin());
-    delay(250); // debounce
+    Serial.print("Pin states at time of interrupt: 0b");
+    Serial.println(mcp.getCapturedInterrupt(), 2);
+    delay(250);  // debounce
+    // NOTE: If using DEFVAL, INT clears only if interrupt
+    // condition does not exist.
+    // See Fig 1-7 in datasheet.
+    mcp.clearInterrupts();  // clear
   }
 }
