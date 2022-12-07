@@ -225,7 +225,6 @@ void Adafruit_MCP23XXX::clearInterrupts() {
 */
 /**************************************************************************/
 uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
-  uint8_t intpin = MCP23XXX_INT_ERR;
   uint8_t intf;
 
   // Port A
@@ -234,25 +233,23 @@ uint8_t Adafruit_MCP23XXX::getLastInterruptPin() {
   INTFA.read(&intf);
   for (uint8_t pin = 0; pin < 8; pin++) {
     if (intf & (1 << pin)) {
-      intpin = pin;
-      break;
+      return pin;
     }
   }
 
-  // Port B and still not found?
-  if ((pinCount > 8) && (intpin == MCP23XXX_INT_ERR)) {
+  // Port B ?
+  if (pinCount > 8) {
     Adafruit_BusIO_Register INTFB(i2c_dev, spi_dev, MCP23XXX_SPIREG,
                                   getRegister(MCP23XXX_INTF, 1));
     INTFB.read(&intf);
     for (uint8_t pin = 0; pin < 8; pin++) {
       if (intf & (1 << pin)) {
-        intpin = pin + 8;
-        break;
+        return pin + 8;
       }
     }
   }
 
-  return intpin;
+  return MCP23XXX_INT_ERR;
 }
 
 /**************************************************************************/
