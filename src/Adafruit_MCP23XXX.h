@@ -64,10 +64,10 @@ public:
   uint16_t getCapturedInterrupt();
 
 protected:
-  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
-  Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
-  uint8_t pinCount;                   ///< Total number of GPIO pins
-  uint8_t hw_addr;                    ///< HW address matching A2/A1/A0 pins
+  Adafruit_I2CDevice *i2c_dev = nullptr; ///< Pointer to I2C bus interface
+  Adafruit_SPIDevice *spi_dev = nullptr; ///< Pointer to SPI bus interface
+  uint8_t pinCount;                      ///< Total number of GPIO pins
+  uint8_t hw_addr;                       ///< HW address matching A2/A1/A0 pins
   uint16_t getRegister(uint8_t baseAddress, uint8_t port = 0);
 
 private:
