@@ -292,10 +292,8 @@ uint16_t Adafruit_MCP23XXX::getRegister(uint8_t baseAddress, uint8_t port) {
   uint16_t reg = baseAddress;
   // MCP23x17 BANK=0
   if (pinCount > 8) {
-    reg *= 2;
-    // Port B
-    if (port)
-      reg++;
+    reg <<= 1;
+    reg |= port;
   }
   // for SPI, add opcode as high byte
   return (spi_dev) ? (0x4000 | (hw_addr << 9) | reg) : reg;
