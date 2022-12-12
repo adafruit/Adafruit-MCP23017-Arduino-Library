@@ -16,24 +16,24 @@ To install, use the Arduino IDE Library Manager.
 
 When using single pin operations such as _pinMode(pinId, dir)_ or _digitalRead(pinId)_  or _digitalWrite(pinId, val)_ then the pins are addressed using the ID's below. For example, for set the mode of _GPB0_ then use _pinMode(8, ...)_. **NOTE** The MCP23008 and MCP23S08 only have _GPAx_ pins.
 
-MCP23x08 Pin # | MCP23x17 Pin # | Pin Name | Pin ID
-:-------------:|:--------------:|:--------:|:-------:
-10 | 21 | GPA0 | 0
-11 | 22 | GPA1 | 1
-12 | 23 | GPA2 | 2
-13 | 24 | GPA3 | 3
-14 | 25 | GPA4 | 4
-15 | 26 | GPA5 | 5
-16 | 27 | GPA6 | 6
-17 | 28 | GPA7 | 7
--- |  1 | GPB0 |  8
--- |  2 | GPB1 |  9
--- |  3 | GPB2 | 10
--- |  4 | GPB3 | 11
--- |  5 | GPB4 | 12
--- |  6 | GPB5 | 13
--- |  7 | GPB6 | 14
--- |  8 | GPB7 | 15
+| MCP23x08 Pin # | MCP23x17 Pin # | Pin Name | Pin ID |
+| :------------: | :------------: | :------: | :----: |
+|       10       |       21       |   GPA0   |   0    |
+|       11       |       22       |   GPA1   |   1    |
+|       12       |       23       |   GPA2   |   2    |
+|       13       |       24       |   GPA3   |   3    |
+|       14       |       25       |   GPA4   |   4    |
+|       15       |       26       |   GPA5   |   5    |
+|       16       |       27       |   GPA6   |   6    |
+|       17       |       28       |   GPA7   |   7    |
+|       --       |       1        |   GPB0   |   8    |
+|       --       |       2        |   GPB1   |   9    |
+|       --       |       3        |   GPB2   |   10   |
+|       --       |       4        |   GPB3   |   11   |
+|       --       |       5        |   GPB4   |   12   |
+|       --       |       6        |   GPB5   |   13   |
+|       --       |       7        |   GPB6   |   14   |
+|       --       |       8        |   GPB7   |   15   |
 
 # Use of HW address pins for SPI device
 
@@ -43,7 +43,7 @@ To use it provide HW address to begin_SPI(CS, SPI, HW_ADDR) function, and as a r
 Example:
 mcp.begin_SPI(10, &SPI, 0b101);
 
-MCP23S08 uses addr pins by default. For MCP23S17 address recognition must be enabled by enableAddrPins() function. **NOTE** Calling enableAddrPins() will enable IOCON.HAEN bit for all active (CS low) devices on SPI bus.
+HW Address recognition must be enabled by enableAddrPins() function. **NOTE** Calling enableAddrPins() will enable IOCON.HAEN bit for all active (CS low) devices on SPI bus.
 **NOTE**
 There is hardware bug in the MCP23S17 chip, see "MCP23S17 Rev. A Silicon Errata".
 As a result, if using device with A2 = high, and not using addressing, hw address must be set to 0b1XX
