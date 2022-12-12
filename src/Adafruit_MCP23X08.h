@@ -13,7 +13,7 @@
 */
 /**************************************************************************/
 class Adafruit_MCP23X08 : public Adafruit_MCP23XXX {
- public:
+public:
   Adafruit_MCP23X08();
 
   void enableAddrPins();

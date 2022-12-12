@@ -22,7 +22,7 @@ Adafruit_MCP23X08::Adafruit_MCP23X08() { pinCount = 8; }
 */
 /**************************************************************************/
 void Adafruit_MCP23X08::enableAddrPins() {
-  if (!spi_dev)  // I2C dev always use addr, only makes sense for SPI dev
+  if (!spi_dev) // I2C dev always use addr, only makes sense for SPI dev
     return;
 
   Adafruit_BusIO_Register GPIOAddr(i2c_dev, spi_dev, MCP23XXX_SPIREG,
