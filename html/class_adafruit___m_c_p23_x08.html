@@ -86,6 +86,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x08.html#a8e49be5614a4e491727cb0f5ec4d1865">Adafruit_MCP23X08</a> ()</td></tr>
 <tr class="memdesc:a8e49be5614a4e491727cb0f5ec4d1865"><td class="mdescLeft">&#160;</td><td class="mdescRight">default ctor. <br /></td></tr>
 <tr class="separator:a8e49be5614a4e491727cb0f5ec4d1865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c41b799f09bf70be9549115c9742b7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x08.html#a8c41b799f09bf70be9549115c9742b7a">enableAddrPins</a> ()</td></tr>
+<tr class="memdesc:a8c41b799f09bf70be9549115c9742b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable usage of HW address pins (A0, A1) on MCP23S08.  <a href="#a8c41b799f09bf70be9549115c9742b7a">More...</a><br /></td></tr>
+<tr class="separator:a8c41b799f09bf70be9549115c9742b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_adafruit___m_c_p23_x_x_x"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_adafruit___m_c_p23_x_x_x')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_adafruit___m_c_p23_x_x_x.html">Adafruit_MCP23XXX</a></td></tr>
 <tr class="memitem:adef0d2d16f9c2d558a3b72483d4f129b inherit pub_methods_class_adafruit___m_c_p23_x_x_x"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x_x_x.html#adef0d2d16f9c2d558a3b72483d4f129b">begin_I2C</a> (uint8_t i2c_addr=<a class="el" href="_adafruit___m_c_p23_x_x_x_8h.html#ae748776eca7f5d4ec407fc73734430c5">MCP23XXX_ADDR</a>, TwoWire *wire=&amp;Wire)</td></tr>
 <tr class="memdesc:adef0d2d16f9c2d558a3b72483d4f129b inherit pub_methods_class_adafruit___m_c_p23_x_x_x"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize MCP using I2C.  <a href="class_adafruit___m_c_p23_x_x_x.html#adef0d2d16f9c2d558a3b72483d4f129b">More...</a><br /></td></tr>
@@ -139,11 +142,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a01472817bd78630d6ab854c882e3f10d inherit pro_methods_class_adafruit___m_c_p23_x_x_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_adafruit___m_c_p23_x_x_x"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_adafruit___m_c_p23_x_x_x')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_adafruit___m_c_p23_x_x_x.html">Adafruit_MCP23XXX</a></td></tr>
 <tr class="memitem:a929e328c378f4412499da91c101b589c inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="memItemLeft" align="right" valign="top"><a id="a929e328c378f4412499da91c101b589c"></a>
-Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x_x_x.html#a929e328c378f4412499da91c101b589c">i2c_dev</a> = NULL</td></tr>
+Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x_x_x.html#a929e328c378f4412499da91c101b589c">i2c_dev</a> = nullptr</td></tr>
 <tr class="memdesc:a929e328c378f4412499da91c101b589c inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to I2C bus interface. <br /></td></tr>
 <tr class="separator:a929e328c378f4412499da91c101b589c inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a977afb2d949acc1febccc8c99bb018e3 inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="memItemLeft" align="right" valign="top"><a id="a977afb2d949acc1febccc8c99bb018e3"></a>
-Adafruit_SPIDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x_x_x.html#a977afb2d949acc1febccc8c99bb018e3">spi_dev</a> = NULL</td></tr>
+Adafruit_SPIDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_c_p23_x_x_x.html#a977afb2d949acc1febccc8c99bb018e3">spi_dev</a> = nullptr</td></tr>
 <tr class="memdesc:a977afb2d949acc1febccc8c99bb018e3 inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to SPI bus interface. <br /></td></tr>
 <tr class="separator:a977afb2d949acc1febccc8c99bb018e3 inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab770c2ca6d586b9235b9ed84341af644 inherit pro_attribs_class_adafruit___m_c_p23_x_x_x"><td class="memItemLeft" align="right" valign="top"><a id="ab770c2ca6d586b9235b9ed84341af644"></a>
@@ -157,7 +160,29 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for MCP23008 I2C and MCP23S08 SPI variants. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8c41b799f09bf70be9549115c9742b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c41b799f09bf70be9549115c9742b7a">&#9670;&nbsp;</a></span>enableAddrPins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_MCP23X08::enableAddrPins </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable usage of HW address pins (A0, A1) on MCP23S08. </p>
+<p>Send this message as first message after chip init.</p>
+<p>By default HW address pins are disabled. (Register IOCON, bit HAEN = 0 on chip reset) </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_adafruit___m_c_p23_x08_8h_source.html">Adafruit_MCP23X08.h</a></li>
 <li><a class="el" href="_adafruit___m_c_p23_x08_8cpp.html">Adafruit_MCP23X08.cpp</a></li>
 </ul>
