@@ -42,9 +42,10 @@ public:
   // init
   bool begin_I2C(uint8_t i2c_addr = MCP23XXX_ADDR, TwoWire *wire = &Wire);
   bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI,
-                 uint8_t _hw_addr = 0x00);
+                 uint8_t _hw_addr = 0x00, uint32_t freq = 1000000);
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
-                 int8_t mosi_pin, uint8_t _hw_addr = 0x00);
+                 int8_t mosi_pin, uint8_t _hw_addr = 0x00,
+                 uint32_t freq = 1000000);
 
   // main Arduino API methods
   void pinMode(uint8_t pin, uint8_t mode);

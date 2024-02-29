@@ -41,13 +41,14 @@ bool Adafruit_MCP23XXX::begin_I2C(uint8_t i2c_addr, TwoWire *wire) {
   @param cs_pin Pin to use for SPI chip select
   @param theSPI Pointer to SPI instance
   @param _hw_addr Hardware address (pins A2, A1, A0)
+  @param freq SPI clock frequency to use in Hz. Defaults to 1MHz
   @return true if initialization successful, otherwise false.
 */
 /**************************************************************************/
 bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI,
-                                  uint8_t _hw_addr) {
+                                  uint8_t _hw_addr, uint32_t freq) {
   this->hw_addr = _hw_addr;
-  spi_dev = new Adafruit_SPIDevice(cs_pin, 1000000, SPI_BITORDER_MSBFIRST,
+  spi_dev = new Adafruit_SPIDevice(cs_pin, freq, SPI_BITORDER_MSBFIRST,
                                    SPI_MODE0, theSPI);
   return spi_dev->begin();
 }
@@ -60,14 +61,15 @@ bool Adafruit_MCP23XXX::begin_SPI(uint8_t cs_pin, SPIClass *theSPI,
   @param miso_pin Pin to use for SPI MISO
   @param mosi_pin Pin to use for SPI MOSI
   @param _hw_addr Hardware address (pins A2, A1, A0)
+  @param freq SPI clock frequency to use in Hz. Defaults to 1MHz
   @return true if initialization successful, otherwise false.
 */
 /**************************************************************************/
 bool Adafruit_MCP23XXX::begin_SPI(int8_t cs_pin, int8_t sck_pin,
                                   int8_t miso_pin, int8_t mosi_pin,
-                                  uint8_t _hw_addr) {
+                                  uint8_t _hw_addr, uint32_t freq) {
   this->hw_addr = _hw_addr;
-  spi_dev = new Adafruit_SPIDevice(cs_pin, sck_pin, miso_pin, mosi_pin);
+  spi_dev = new Adafruit_SPIDevice(cs_pin, sck_pin, miso_pin, mosi_pin, freq);
   return spi_dev->begin();
 }
 
